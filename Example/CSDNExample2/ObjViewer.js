@@ -184,11 +184,16 @@ function render() {
 	
 	// 传值给shader中的u_ModelView
 	gl.uniformMatrix4fv(u_ModelView, false, flatten(matModelView));
-	
+
+
+	attribIndex
+
 	// 绘制obj模型
 	obj00.draw(gl, attribIndex, mtlIndex, u_Sampler);
 	obj00B.draw(gl, attribIndex, mtlIndex, u_Sampler);
 	obj00M.draw(gl, attribIndex, mtlIndex, u_Sampler);
+
+
 }
 
 // 按键响应

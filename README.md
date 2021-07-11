@@ -3,6 +3,5 @@ RubikCube-ComputerGraphics-Polimi-2021
 
 ## TODO List
 1. Build cube from resources </br>
-2. External rotation </br>
-3. Internal rotation </br>
-4. Rendering
+2. External/Internal rotation </br>
+3. Rendering  </br>
