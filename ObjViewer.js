@@ -6,7 +6,7 @@ var gl;						// WebGL上下文
 // 以下全局变量用于控制动画的状态和速度
 var angleY = 0.0;		// 绕y轴旋转的角度
 var angleX = 0.0;		// 绕x轴旋转的角度
-var angleStep = 3.0;	// 角度变化步长(3度)
+var angleStep = 5.0;	// 角度变化步长(3度)
 
 // shader中变量的索引
 var attribIndex = new AttribIndex();  	// shader中attribute变量索引
@@ -25,6 +25,7 @@ var obj00 = loadOBJ("Assert\\Cube00.obj");
 var obj00B = loadOBJ("Assert\\Cube00_B.obj");
 var obj00M = loadOBJ("Assert\\Cube00_M.obj");
 
+
 // 页面加载完成后会调用此函数，函数名可任意(不一定为main)
 window.onload = function main(){
 	// 获取页面中id为webgl的canvas元素
@@ -40,7 +41,7 @@ window.onload = function main(){
     if (!gl){ // 失败则弹出信息
 		alert("获取WebGL上下文失败！"); 
 		return;
-	}        
+	}
 	
 	/*设置WebGL相关属性*/
     gl.clearColor(0.5, 0.5, 0.5, 1.0); // 设置背景色为灰色
@@ -49,7 +50,8 @@ window.onload = function main(){
 	// 设置视口，占满整个canvas
 	gl.viewport(0, 0, canvas.width, canvas.height);
 	// 设置投影矩阵：透视投影，根据视口宽高比指定视域体
-	var matProj = perspective(35.0, 		// 垂直方向视角
+	// projection matrix
+	var matProj = perspective(30.0, 		// 垂直方向视角
 		canvas.width / canvas.height, 	// 视域体宽高比
 		1.0, 							// 相机到近裁剪面距离
 		100.0);							// 相机到远裁剪面距离
@@ -63,6 +65,7 @@ window.onload = function main(){
 	
 	// 获取名称为"a_Position"的shader attribute变量的位置
     var a_Position = gl.getAttribLocation(program, "a_Position");
+    console.log(a_Position);
 	if(a_Position < 0){ // getAttribLocation获取失败则返回-1
 		alert("获取attribute变量a_Position失败！"); 
 		return;
@@ -70,7 +73,7 @@ window.onload = function main(){
 
 	// 获取名称为"a_Normal"的shader attribute变量的位置
     var a_Normal = gl.getAttribLocation(program, "a_Normal");
-	if(a_Normal < 0){ // getAttribLocation获取失败则返回-1
+	if(a_Normal < 0){ // getAttribLo cation获取失败则返回-1
 		alert("获取attribute变量a_Normal失败！"); 
 		return;
 	}	
@@ -159,7 +162,7 @@ window.onload = function main(){
 		alert("获取uniform变量u_Sampler失败！")
 		return;
 	}
-	
+
 	// 进行绘制
     render();
 };
@@ -176,19 +179,23 @@ function render() {
 	// 清颜色缓存和深度缓存
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
-	// 创建变换矩阵
+	// 创建变换矩阵 view matrix
 	var matModelView = 
-		mult(translate(0.0, 0.0, -20.0), 	// 沿z轴平移
+		mult(translate(0.0, 0.0, -40), 	// 沿z轴平移
 		mult(rotateY(angleY),	     		// 绕y轴旋转
 		rotateX(angleX)));		     		// 绕x轴旋转
 	
 	// 传值给shader中的u_ModelView
 	gl.uniformMatrix4fv(u_ModelView, false, flatten(matModelView));
-	
+
+	//console.log("外面读取：%d", obj00.groups[1].vBuffer);
 	// 绘制obj模型
-	obj00.draw(gl, attribIndex, mtlIndex, u_Sampler);
+	obj00.lookBufferInfo();
+	obj00.draw(gl, attribIndex, mtlIndex, null);
 	obj00B.draw(gl, attribIndex, mtlIndex, u_Sampler);
 	obj00M.draw(gl, attribIndex, mtlIndex, u_Sampler);
+
+
 }
 
 // 按键响应
@@ -218,7 +225,7 @@ window.onkeydown = function(){
 			if (angleX > 80.0) {
 				angleX = 80.0;
 			}
-			break;
+			break
 		default:
 			return;
 	}
