@@ -941,7 +941,20 @@ function loadMeshAndWorldMatrix(){
 	for(var i = 0; i < 26; i++)
 	{
 		//mesh[i] = loadMeshInfo(cubeObjMesh[i]);
-		cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
+		//TODO Make the world matrix
+		if(i in [0,3,6,9,13,16,19,22,23]){
+
+			// utils.multiplyMatrices(utils.MakeTranslateMatrix(-2,0,0),utils.multiplyMatrices(dvecmat, utils.MakeScaleMatrix(0.3)));
+			// cubeWorldMatrix[i] = utils.multiplyMatrices(updateWorld(20,20,20), utils.MakeScaleMatrix(worldScale));
+
+			// cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeRotateXMatrix(90),utils.MakeScaleMatrix(worldScale));
+			cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(40));
+		}else {
+			cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
+		}
+
+
+
 	}
 }
 
@@ -958,6 +971,8 @@ function drawScene(){
 		cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
 		cx = lookRadius * Math.sin(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
 		cy = lookRadius * Math.sin(utils.degToRad(-elevation));
+
+		// TODO Fix the Camera!!!
 		viewMatrix = utils.MakeView(cx, cy, cz, elevation, -angle);
 
 		for(var i = 0; i < 26; i++)
