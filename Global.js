@@ -20,8 +20,8 @@ var worldScale = 0.3;
 
 var cubeMesh = [];
 
-//使用它做变换!!!!!! 一共26个world matrix 对应着26个方块!
 var cubeWorldMatrix = [];
+
 //Parameters for Camera
 var cx = 0.0;
 var cy = 0.0;
@@ -37,6 +37,7 @@ var keys = [];
 var rvx = 0.0;
 var rvy = 0.0;
 var rvz = 0.0;
+var angleKeys = 0.0;
 
 var cubeBlockStatus=
     [
@@ -58,6 +59,7 @@ var cubeBlockStatus=
     ]
 
 
-var rotationAngle=0;
-var rotationAxis;
-var operationBlocks;
+var rotationAngle=0.0;
+var rotationAxis='X';
+var operationBlocks=[-1];
+

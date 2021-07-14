@@ -1,17 +1,28 @@
 
 
-function updateBlocksWorld() {
+function updateBlocksWorldMatrix() {
 
 	//TODO Make the world matrix
-	for(var i = 0; i < 26; i++)
+	for(var n = 0; n < 26; n++)
 	{
-		if(operationBlocks.includes(i)){
+		if(operationBlocks.includes(n)){
 
+			rotationAngle = rotationAngle + angleKeys;
 			// utils.multiplyMatrices(utils.MakeTranslateMatrix(-2,0,0),utils.multiplyMatrices(dvecmat, utils.MakeScaleMatrix(0.3)));
 			// cubeWorldMatrix[i] = utils.multiplyMatrices(updateWorld(20,20,20), utils.MakeScaleMatrix(worldScale));
 
 			// cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeRotateXMatrix(90),utils.MakeScaleMatrix(worldScale));
-			cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle));
+			switch (rotationAxis) {
+				case "X":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle));
+					break;
+				case "Y":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateYMatrix(rotationAngle));
+					break;
+				case "Z":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateZMatrix(rotationAngle));
+					break;
+			}
 		}
 	}
 
@@ -27,8 +38,8 @@ function updateCubeBlockStatus(){
 }
 
 //R:i=2, M:i=1, L:i=0
-function rotationX(i){
-	var tempCube = cubeBlockStatus;
+function rotationX(i) {
+	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatus));
 	tempCube[0][2][i] = cubeBlockStatus[0][0][i];
 	tempCube[1][2][i] = cubeBlockStatus[0][1][i];
 	tempCube[2][2][i] = cubeBlockStatus[0][2][i];
@@ -40,8 +51,7 @@ function rotationX(i){
 	tempCube[0][0][i] = cubeBlockStatus[2][0][i];
 	tempCube[1][0][i] = cubeBlockStatus[2][1][i];
 	tempCube[2][0][i] = cubeBlockStatus[2][2][i];
-
-	cubeBlockStatus = tempCube
+	cubeBlockStatus = tempCube;
 }
 
 //U:i=0, E:i=1, D:i=2

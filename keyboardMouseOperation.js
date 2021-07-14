@@ -20,11 +20,12 @@ var keyFunctionDown =function(e) {
                 break;
             case 82:
                 rotationAxis = 'X';
-                rotationAngle = rotationAngle + 1.0;
+                angleKeys = angleKeys + 0.1;
                 operationBlocks = [cubeBlockStatus[0][2][2],cubeBlockStatus[0][1][2],cubeBlockStatus[0][0][2],
                                     cubeBlockStatus[1][2][2],cubeBlockStatus[1][1][2],cubeBlockStatus[1][0][2],
                                     cubeBlockStatus[2][2][2],cubeBlockStatus[2][1][2],cubeBlockStatus[2][0][2]];
-                updateBlocksWorld();
+
+                break;
         }
     }
 }
@@ -49,7 +50,16 @@ var keyFunctionUp =function(e) {
 //console.log("KeyDown - Dir DOWN");
                 rvx = rvx + 1.0;
                 break;
-            case 81:
+            case 82:
+                //TODO
+                console.log(cubeBlockStatus);
+                rotationAngle=Math.round((rotationAngle%360)/90)*90;
+                angleKeys = 0;
+                for (var j=Math.round((rotationAngle%360)/90);j>0;j--){
+                    cubeBlockStatus = rotationX(2);
+                }
+                console.log(cubeBlockStatus);
+                break;
         }
     }
 }

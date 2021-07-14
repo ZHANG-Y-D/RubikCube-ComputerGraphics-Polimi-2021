@@ -816,6 +816,8 @@ function main(){
 
 		loadMeshAndWorldMatrix();
 		drawScene();
+
+
 	}else{
 		alert("Error: WebGL not supported by your browser!");
 	}
@@ -854,14 +856,13 @@ function loadMeshAndWorldMatrix(){
 	mesh[25] = loadMeshInfoURL("Assert\\Cube22_B.obj");
 
 
-
-
-
 	for(var i = 0; i < 26; i++)
 	{
 			cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
 	}
 
+	//TODO Try to find the cube position
+	// cubeWorldMatrix[9] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(40));
 
 }
 
@@ -871,50 +872,55 @@ async function drawInAsync(){
 
 
 function drawScene(){
-		// update WV matrix
-	
-		angle = angle + rvy;
-		elevation = elevation + rvx;
-		
-		cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
-		cx = lookRadius * Math.sin(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
-		cy = lookRadius * Math.sin(utils.degToRad(-elevation));
 
-		// TODO Fix the Camera!!!
-		viewMatrix = utils.MakeView(cx, cy, cz, elevation, -angle);
+	// update World matrix
+	updateBlocksWorldMatrix();
 
-		for(var i = 0; i < 26; i++)
-		{
-			// Magic for moving the car
-			//worldMatrix = utils.MakeScaleMatrix(worldScale);
-			projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewMatrix);		
-	
+	// update WV matrix
+	angle = angle + rvy;
+	elevation = elevation + rvx;
+
+	cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
+	cx = lookRadius * Math.sin(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
+	cy = lookRadius * Math.sin(utils.degToRad(-elevation));
+
+	// TODO Fix the Camera!!!
+	viewMatrix = utils.MakeView(cx, cy, cz, elevation, -angle);
+
+	for(var i = 0; i < 26; i++)
+	{
+		// Magic for moving the car
+		//worldMatrix = utils.MakeScaleMatrix(worldScale);
+		projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewMatrix);
+
 		// draws the request
-			gl.bindBuffer(gl.ARRAY_BUFFER, mesh[i].vertexBuffer);
-			gl.vertexAttribPointer(program.vertexPositionAttribute, mesh[i].vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
-			
-			gl.bindBuffer(gl.ARRAY_BUFFER, mesh[i].textureBuffer);
-			gl.vertexAttribPointer(program.textureCoordAttribute, mesh[i].textureBuffer.itemSize, gl.FLOAT, false, 0, 0);
-			
-			gl.bindBuffer(gl.ARRAY_BUFFER, mesh[i].normalBuffer);
-			gl.vertexAttribPointer(program.vertexNormalAttribute, mesh[i].normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
-			 
-			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, mesh[i].indexBuffer);		
-			
+		gl.bindBuffer(gl.ARRAY_BUFFER, mesh[i].vertexBuffer);
+		gl.vertexAttribPointer(program.vertexPositionAttribute, mesh[i].vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-			gl.uniform1i(program.u_textureUniform, 0);
-			gl.uniform3f(program.eyePosUniform, cx, cy, cz);
-			WVPmatrix = utils.multiplyMatrices(projectionMatrix, cubeWorldMatrix[i]);
-			gl.uniformMatrix4fv(program.pMatrixUniform, gl.FALSE, utils.transposeMatrix(WVPmatrix));
-			gl.uniformMatrix4fv(program.wMatrixUniform, gl.FALSE, utils.transposeMatrix(cubeWorldMatrix[i]));
-			
-			gl.drawElements(gl.TRIANGLES, mesh[i].indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-		}	
-			for(var i = 0; i < unifParArray.length; i++) {
-				unifParArray[i].type(gl);
-			}
-			window.requestAnimationFrame(drawScene);
+		//TODO fix the texture problem
+		gl.bindBuffer(gl.ARRAY_BUFFER, mesh[i].textureBuffer);
+		gl.vertexAttribPointer(program.textureCoordAttribute, mesh[i].textureBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
+		gl.bindBuffer(gl.ARRAY_BUFFER, mesh[i].normalBuffer);
+		gl.vertexAttribPointer(program.vertexNormalAttribute, mesh[i].normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, mesh[i].indexBuffer);
+
+
+		gl.uniform1i(program.u_textureUniform, 0);
+		gl.uniform3f(program.eyePosUniform, cx, cy, cz);
+		WVPmatrix = utils.multiplyMatrices(projectionMatrix, cubeWorldMatrix[i]);
+		gl.uniformMatrix4fv(program.pMatrixUniform, gl.FALSE, utils.transposeMatrix(WVPmatrix));
+		gl.uniformMatrix4fv(program.wMatrixUniform, gl.FALSE, utils.transposeMatrix(cubeWorldMatrix[i]));
+
+		gl.drawElements(gl.TRIANGLES, mesh[i].indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+	}
+
+	for(var m = 0; m < unifParArray.length; m++) {
+		unifParArray[m].type(gl);
+	}
+
+	window.requestAnimationFrame(drawScene);
 }
 
 
@@ -930,17 +936,23 @@ function loadOBJText(fileName){
 
 	request.onreadystatechange = function() {
 		if (request.readyState === 4 && request.status !== 404) {
-			console.log(fileName + "加载完毕");
+			console.log(fileName + "Loaded successful");
 			console.log(request.responseText);
 			return request.responseText;//onReadOBJFile(request.responseText, objModel);
 		}
-		else if(request.status === 404) // 文件找不到
-			console.log("obj文件加载失败：" + fileName);
+		else if(request.status === 404) // File not found
+			console.log("obj file loading failed：" + fileName);
 	}
-	// 创建获取文件的请求，最后一个参数表示采用异步方式
+
+
+	//TODO Fix the runtime error
+	// Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience.
+	// For more help, check https://xhr.spec.whatwg.org/.
+
+	// Create a request to get the file, the last parameter indicates the asynchronous method
 	request.open('GET', fileName, false); 
-	request.send();  // 发送请求  
-	console.log("开始加载材质文件：" + fileName);
+	request.send();  // send request
+	console.log("Start loading texture files：" + fileName);
 	return request.responseText;
 }
 	
