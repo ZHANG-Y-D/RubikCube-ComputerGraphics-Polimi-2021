@@ -1,92 +1,6 @@
-var canvas;
-
-var gl = null,
-	program = null,
-	worldMesh = null,
-	//mesh = null,
-	skybox = null,
-	imgtx = null,
-	skyboxLattx = null,
-	skyboxTbtx = null;
-var mesh = [];
-	
-var projectionMatrix, 
-	perspectiveMatrix,
-	viewMatrix,
-	worldMatrix,
-	gLightDir;
-
-var worldScale = 0.3;
-
-var cubeMesh = [];
-
-//使用它做变换!!!!!! 一共26个world matrix 对应着26个方块!
-var cubeWorldMatrix = [];
-//Parameters for Camera
-var cx = 0.0;
-var cy = 0.0;
-var cz = 6.5;
-var elevation = 0.01;
-var angle = 0.01;
-var roll = 0.01;
-
-var lookRadius = 10.0;
 
 
-var keys = [];
-var rvx = 0.0;
-var rvy = 0.0;
-var rvz = 0.0;
 
-
-var keyFunctionDown =function(e) {
-  if(!keys[e.keyCode]) {
-  	keys[e.keyCode] = true;
-	switch(e.keyCode) {
-	  case 37:
-//console.log("KeyUp   - Dir LEFT");
-		rvy = rvy - 1.0;
-		break;
-	  case 39:
-//console.log("KeyUp   - Dir RIGHT");
-		rvy = rvy + 1.0;
-		break;
-	  case 38:
-//console.log("KeyUp   - Dir UP");
-		rvx = rvx + 1.0;
-		break;
-	  case 40:
-//console.log("KeyUp   - Dir DOWN");
-		rvx = rvx - 1.0;
-		break;
-	}
-  }
-}
-
-var keyFunctionUp =function(e) {
-  if(keys[e.keyCode]) {
-  	keys[e.keyCode] = false;
-	switch(e.keyCode) {
-	  case 37:
-//console.log("KeyDown  - Dir LEFT");
-		rvy = rvy + 1.0;
-		break;
-	  case 39:
-//console.log("KeyDown - Dir RIGHT");
-		rvy = rvy - 1.0;
-		break;
-	  case 38:
-//console.log("KeyDown - Dir UP");
-		rvx = rvx - 1.0;
-		break;
-	  case 40:
-//console.log("KeyDown - Dir DOWN");
-		rvx = rvx + 1.0;
-		break;
-	  case 81:
-	}
-  }
-}
 function doResize() {
     // set canvas dimensions
 	var canvas = document.getElementById("my-canvas");
@@ -901,28 +815,14 @@ function main(){
 		gLightDir = utils.multiplyMatrixVector(skyboxWM, gLightDir);
 
 		loadMeshAndWorldMatrix();
-		controlCubeSurface0();
+		// updateBlocksWorld();
 		drawScene();
 	}else{
 		alert("Error: WebGL not supported by your browser!");
 	}
 }
-function controlCubeSurface0() {
-	for (var i = 0; i < 26; i++) {
-		//mesh[i] = loadMeshInfo(cubeObjMesh[i]);
-		//TODO Make the world matrix
-		if (i in [0, 3, 6, 9, 13, 16, 19, 22, 23]) {
 
-			// utils.multiplyMatrices(utils.MakeTranslateMatrix(-2,0,0),utils.multiplyMatrices(dvecmat, utils.MakeScaleMatrix(0.3)));
-			// cubeWorldMatrix[i] = utils.multiplyMatrices(updateWorld(20,20,20), utils.MakeScaleMatrix(worldScale));
 
-			// cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeRotateXMatrix(90),utils.MakeScaleMatrix(worldScale));
-			cubeWorldMatrix[i] = utils.multiplyMatrices(cubeWorldMatrix[i], utils.MakeRotateXMatrix(90));
-		} else {
-			//cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
-		}
-	}
-}
 function loadMeshAndWorldMatrix(){
 	mesh[0] = loadMeshInfoURL("Assert\\Cube00.obj");
 	mesh[1] = loadMeshInfoURL("Assert\\Cube01.obj");
@@ -934,39 +834,41 @@ function loadMeshAndWorldMatrix(){
 	mesh[7] = loadMeshInfoURL("Assert\\Cube21.obj");
 	mesh[8] = loadMeshInfoURL("Assert\\Cube22.obj");
 
-	mesh[9] = loadMeshInfoURL("Assert\\Cube00_B.obj");
-	mesh[10] = loadMeshInfoURL("Assert\\Cube01_B.obj");
-	mesh[11] = loadMeshInfoURL("Assert\\Cube02_B.obj");
-	mesh[12] = loadMeshInfoURL("Assert\\Cube10_B.obj");
-	mesh[13] = loadMeshInfoURL("Assert\\Cube11_B.obj");
-	mesh[14] = loadMeshInfoURL("Assert\\Cube12_B.obj");
-	mesh[15] = loadMeshInfoURL("Assert\\Cube20_B.obj");
-	mesh[16] = loadMeshInfoURL("Assert\\Cube21_B.obj");
-	mesh[17] = loadMeshInfoURL("Assert\\Cube22_B.obj");
-
-	mesh[18] = loadMeshInfoURL("Assert\\Cube00_M.obj");
-	mesh[19] = loadMeshInfoURL("Assert\\Cube01_M.obj");
-	mesh[20] = loadMeshInfoURL("Assert\\Cube02_M.obj");
-	mesh[21] = loadMeshInfoURL("Assert\\Cube10_M.obj");
-	mesh[22] = loadMeshInfoURL("Assert\\Cube12_M.obj");
-	mesh[23] = loadMeshInfoURL("Assert\\Cube20_M.obj");
-	mesh[24] = loadMeshInfoURL("Assert\\Cube21_M.obj");
-	mesh[25] = loadMeshInfoURL("Assert\\Cube22_M.obj");
+	mesh[9] = loadMeshInfoURL("Assert\\Cube00_M.obj");
+	mesh[10] = loadMeshInfoURL("Assert\\Cube01_M.obj");
+	mesh[11] = loadMeshInfoURL("Assert\\Cube02_M.obj");
+	mesh[12] = loadMeshInfoURL("Assert\\Cube10_M.obj");
+	mesh[13] = loadMeshInfoURL("Assert\\Cube12_M.obj");
+	mesh[14] = loadMeshInfoURL("Assert\\Cube20_M.obj");
+	mesh[15] = loadMeshInfoURL("Assert\\Cube21_M.obj");
+	mesh[16] = loadMeshInfoURL("Assert\\Cube22_M.obj");
 
 
-	
+	mesh[17] = loadMeshInfoURL("Assert\\Cube00_B.obj");
+	mesh[18] = loadMeshInfoURL("Assert\\Cube01_B.obj");
+	mesh[19] = loadMeshInfoURL("Assert\\Cube02_B.obj");
+	mesh[20] = loadMeshInfoURL("Assert\\Cube10_B.obj");
+	mesh[21] = loadMeshInfoURL("Assert\\Cube11_B.obj");
+	mesh[22] = loadMeshInfoURL("Assert\\Cube12_B.obj");
+	mesh[23] = loadMeshInfoURL("Assert\\Cube20_B.obj");
+	mesh[24] = loadMeshInfoURL("Assert\\Cube21_B.obj");
+	mesh[25] = loadMeshInfoURL("Assert\\Cube22_B.obj");
+
+
+
+
+
 	for(var i = 0; i < 26; i++)
 	{
 			cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
 	}
-
-	// updateBlocksWorld();
 
 }
 
 async function drawInAsync(){
 	return 1;
 }
+
 
 function drawScene(){
 		// update WV matrix
