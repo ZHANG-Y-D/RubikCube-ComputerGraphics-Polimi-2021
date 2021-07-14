@@ -815,7 +815,6 @@ function main(){
 		gLightDir = utils.multiplyMatrixVector(skyboxWM, gLightDir);
 
 		loadMeshAndWorldMatrix();
-		// updateBlocksWorld();
 		drawScene();
 	}else{
 		alert("Error: WebGL not supported by your browser!");
@@ -862,6 +861,7 @@ function loadMeshAndWorldMatrix(){
 	{
 			cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
 	}
+
 
 }
 
