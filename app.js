@@ -889,7 +889,6 @@ function main(){
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
 		gl.viewport(0.0, 0.0, w, h);
 		gl.clear(gl.COLOR_BUFFER_BIT);
-		
 		perspectiveMatrix = utils.MakePerspective(60, w/h, 0.1, 1000.0);
 		
 	 // turn on depth testing
@@ -899,14 +898,30 @@ function main(){
 		gLightDir = [-1.0, 0.0, 0.0, 0.0];
 		skyboxWM = utils.MakeRotateYMatrix(135);
 		gLightDir = utils.multiplyMatrixVector(skyboxWM, gLightDir);
-		
+
 		loadMeshAndWorldMatrix();
+		controlCubeSurface0();
 		drawScene();
 	}else{
 		alert("Error: WebGL not supported by your browser!");
 	}
 }
+function controlCubeSurface0() {
+	for (var i = 0; i < 26; i++) {
+		//mesh[i] = loadMeshInfo(cubeObjMesh[i]);
+		//TODO Make the world matrix
+		if (i in [0, 3, 6, 9, 13, 16, 19, 22, 23]) {
 
+			// utils.multiplyMatrices(utils.MakeTranslateMatrix(-2,0,0),utils.multiplyMatrices(dvecmat, utils.MakeScaleMatrix(0.3)));
+			// cubeWorldMatrix[i] = utils.multiplyMatrices(updateWorld(20,20,20), utils.MakeScaleMatrix(worldScale));
+
+			// cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeRotateXMatrix(90),utils.MakeScaleMatrix(worldScale));
+			cubeWorldMatrix[i] = utils.multiplyMatrices(cubeWorldMatrix[i], utils.MakeRotateXMatrix(90));
+		} else {
+			//cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
+		}
+	}
+}
 function loadMeshAndWorldMatrix(){
 	mesh[0] = loadMeshInfoURL("Assert\\Cube00.obj");
 	mesh[1] = loadMeshInfoURL("Assert\\Cube00_B.obj");
@@ -937,25 +952,11 @@ function loadMeshAndWorldMatrix(){
 	mesh[24] = loadMeshInfoURL("Assert\\Cube22_B.obj");
 	mesh[25] = loadMeshInfoURL("Assert\\Cube22_M.obj");
 
-
 	for(var i = 0; i < 26; i++)
 	{
-		//mesh[i] = loadMeshInfo(cubeObjMesh[i]);
-		//TODO Make the world matrix
-		if(i in [0,3,6,9,13,16,19,22,23]){
-
-			// utils.multiplyMatrices(utils.MakeTranslateMatrix(-2,0,0),utils.multiplyMatrices(dvecmat, utils.MakeScaleMatrix(0.3)));
-			// cubeWorldMatrix[i] = utils.multiplyMatrices(updateWorld(20,20,20), utils.MakeScaleMatrix(worldScale));
-
-			// cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeRotateXMatrix(90),utils.MakeScaleMatrix(worldScale));
-			cubeWorldMatrix[i] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(40));
-		}else {
 			cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
-		}
-
-
-
 	}
+
 }
 
 async function drawInAsync(){
