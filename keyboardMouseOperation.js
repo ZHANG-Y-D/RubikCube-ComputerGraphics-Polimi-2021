@@ -21,9 +21,9 @@ var keyFunctionDown =function(e) {
             case 82:
                 rotationAxis = 'X';
                 angleKeys = angleKeys + 0.1;
-                operationBlocks = [cubeBlockStatus[0][2][2],cubeBlockStatus[0][1][2],cubeBlockStatus[0][0][2],
-                                    cubeBlockStatus[1][2][2],cubeBlockStatus[1][1][2],cubeBlockStatus[1][0][2],
-                                    cubeBlockStatus[2][2][2],cubeBlockStatus[2][1][2],cubeBlockStatus[2][0][2]];
+                operationBlocks = [this.cubeBlockStatus[0][2][2],this.cubeBlockStatus[0][1][2],this.cubeBlockStatus[0][0][2],
+                                    this.cubeBlockStatus[1][2][2],this.cubeBlockStatus[1][1][2],this.cubeBlockStatus[1][0][2],
+                                    this.cubeBlockStatus[2][2][2],this.cubeBlockStatus[2][1][2],this.cubeBlockStatus[2][0][2]];
 
                 break;
         }
@@ -52,13 +52,11 @@ var keyFunctionUp =function(e) {
                 break;
             case 82:
                 //TODO
-                console.log(cubeBlockStatus);
                 rotationAngle=Math.round((rotationAngle%360)/90)*90;
                 angleKeys = 0;
                 for (var j=Math.round((rotationAngle%360)/90);j>0;j--){
-                    cubeBlockStatus = rotationX(2);
+                    this.cubeBlockStatus = rotationX(2);
                 }
-                console.log(cubeBlockStatus);
                 break;
         }
     }
