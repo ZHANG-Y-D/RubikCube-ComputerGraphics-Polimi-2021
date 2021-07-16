@@ -3,22 +3,21 @@ var keyFunctionDown =function(e) {
         keys[e.keyCode] = true;
         switch(e.keyCode) {
             case 37:
-//console.log("KeyUp   - Dir LEFT");
+                //console.log("KeyUp   - Dir LEFT");
                 rvy = rvy - 1.0;
                 break;
             case 39:
-//console.log("KeyUp   - Dir RIGHT");
+                //console.log("KeyUp   - Dir RIGHT");
                 rvy = rvy + 1.0;
                 break;
             case 38:
-//console.log("KeyUp   - Dir UP");
+                //console.log("KeyUp   - Dir UP");
                 rvx = rvx + 1.0;
                 break;
             case 40:
-//console.log("KeyUp   - Dir DOWN");
+                //console.log("KeyUp   - Dir DOWN");
                 rvx = rvx - 1.0;
                 break;
-                //UUUUUUUUUU
             case 85:
                 rotationAxis = 'Y';
                 nowControlAscept = 3;
@@ -59,36 +58,35 @@ var keyFunctionUp =function(e) {
         keys[e.keyCode] = false;
         switch(e.keyCode) {
             case 37:
-//console.log("KeyDown  - Dir LEFT");
+                //console.log("KeyDown  - Dir LEFT");
                 rvy = rvy + 1.0;
                 break;
             case 39:
-//console.log("KeyDown - Dir RIGHT");
+                //console.log("KeyDown - Dir RIGHT");
                 rvy = rvy - 1.0;
                 break;
             case 38:
-//console.log("KeyDown - Dir UP");
+                //console.log("KeyDown - Dir UP");
                 rvx = rvx - 1.0;
                 break;
             case 40:
-//console.log("KeyDown - Dir DOWN");
+                //console.log("KeyDown - Dir DOWN");
                 rvx = rvx + 1.0;
                 break;
-
             case 85:
                 //TODO
-                console.log(cubeBlockStatus);
+                //console.log(cubeBlockStatus);
                 nowControlAscept = 3;
                 rotationAngle[3]=Math.round((rotationAngle[3]%360)/90)*90;
                 angleKeys[3] = 0;
                 for (var j=Math.round((rotationAngle[3]%360)/90);j>0;j--){
                     cubeBlockStatus = rotationY(1,cubeBlockStatus);
                 }
-                console.log(cubeBlockStatus);
+                //console.log(cubeBlockStatus);
                 break;
             case 76:
                 //TODO
-                console.log(cubeBlockStatus);
+                //console.log(cubeBlockStatus);
                 nowControlAscept = 0;
                 rotationAngle[0]=Math.round((rotationAngle[0]%360)/90)*90;
                 angleKeys[0] = 0;
@@ -96,19 +94,19 @@ var keyFunctionUp =function(e) {
                     cubeBlockStatus = rotationX(0,cubeBlockStatus);
                 }
 
-                console.log(cubeBlockStatus);
+                //console.log(cubeBlockStatus);
                 break;
 
             case 82:
                 //TODO
-                console.log(cubeBlockStatus);
+                //console.log(cubeBlockStatus);
                 nowControlAscept = 1;
                 rotationAngle[1]=Math.round((rotationAngle[1]%360)/90)*90;
                 angleKeys[1] = 0;
                 for (var j=Math.round((rotationAngle[1]%360)/90);j>0;j--){
                     cubeBlockStatus = rotationX(2,cubeBlockStatus);
                 }
-                console.log(cubeBlockStatus);
+                //console.log(cubeBlockStatus);
                 break;
         }
     }
