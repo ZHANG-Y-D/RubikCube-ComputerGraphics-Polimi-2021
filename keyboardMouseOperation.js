@@ -18,13 +18,37 @@ var keyFunctionDown =function(e) {
 //console.log("KeyUp   - Dir DOWN");
                 rvx = rvx - 1.0;
                 break;
+                //UUUUUUUUUU
+            case 85:
+                rotationAxis = 'Y';
+                nowControlAscept = 3;
+                angleKeys[3] = angleKeys[3] + 0.1;
+
+                // operationBlocks = [cubeBlockStatus[0][2][2],cubeBlockStatus[0][1][2],cubeBlockStatus[0][0][2],
+                //                     cubeBlockStatus[1][2][2],cubeBlockStatus[1][1][2],cubeBlockStatus[1][0][2],
+                //                     cubeBlockStatus[2][2][2],cubeBlockStatus[2][1][2],cubeBlockStatus[2][0][2]];
+                operationBlocks = rotationYOperationBlocks(1,cubeBlockStatus);
+                break;
+
+            case 76:
+                rotationAxis = 'X';
+                nowControlAscept = 0;
+                angleKeys[0] = angleKeys[0] + 0.1;
+
+                // operationBlocks = [cubeBlockStatus[0][2][2],cubeBlockStatus[0][1][2],cubeBlockStatus[0][0][2],
+                //                     cubeBlockStatus[1][2][2],cubeBlockStatus[1][1][2],cubeBlockStatus[1][0][2],
+                //                     cubeBlockStatus[2][2][2],cubeBlockStatus[2][1][2],cubeBlockStatus[2][0][2]];
+                operationBlocks = rotationXOperationBlocks(0,cubeBlockStatus);
+                break;
+
             case 82:
                 rotationAxis = 'X';
-                angleKeys = angleKeys + 0.1;
-                operationBlocks = [this.cubeBlockStatus[0][2][2],this.cubeBlockStatus[0][1][2],this.cubeBlockStatus[0][0][2],
-                                    this.cubeBlockStatus[1][2][2],this.cubeBlockStatus[1][1][2],this.cubeBlockStatus[1][0][2],
-                                    this.cubeBlockStatus[2][2][2],this.cubeBlockStatus[2][1][2],this.cubeBlockStatus[2][0][2]];
-
+                nowControlAscept = 1;
+                angleKeys[1] = angleKeys[1] + 0.1;
+                // operationBlocks = [cubeBlockStatus[0][2][2],cubeBlockStatus[0][1][2],cubeBlockStatus[0][0][2],
+                //                     cubeBlockStatus[1][2][2],cubeBlockStatus[1][1][2],cubeBlockStatus[1][0][2],
+                //                     cubeBlockStatus[2][2][2],cubeBlockStatus[2][1][2],cubeBlockStatus[2][0][2]];
+                operationBlocks = rotationXOperationBlocks(2,cubeBlockStatus);
                 break;
         }
     }
@@ -50,13 +74,41 @@ var keyFunctionUp =function(e) {
 //console.log("KeyDown - Dir DOWN");
                 rvx = rvx + 1.0;
                 break;
+
+            case 85:
+                //TODO
+                console.log(cubeBlockStatus);
+                nowControlAscept = 3;
+                rotationAngle[3]=Math.round((rotationAngle[3]%360)/90)*90;
+                angleKeys[3] = 0;
+                for (var j=Math.round((rotationAngle[3]%360)/90);j>0;j--){
+                    cubeBlockStatus = rotationY(1,cubeBlockStatus);
+                }
+                console.log(cubeBlockStatus);
+                break;
+            case 76:
+                //TODO
+                console.log(cubeBlockStatus);
+                nowControlAscept = 0;
+                rotationAngle[0]=Math.round((rotationAngle[0]%360)/90)*90;
+                angleKeys[0] = 0;
+                for (var j=Math.round((rotationAngle[0]%360)/90);j>0;j--){
+                    cubeBlockStatus = rotationX(0,cubeBlockStatus);
+                }
+
+                console.log(cubeBlockStatus);
+                break;
+
             case 82:
                 //TODO
-                rotationAngle=Math.round((rotationAngle%360)/90)*90;
-                angleKeys = 0;
-                for (var j=Math.round((rotationAngle%360)/90);j>0;j--){
-                    this.cubeBlockStatus = rotationX(2);
+                console.log(cubeBlockStatus);
+                nowControlAscept = 1;
+                rotationAngle[1]=Math.round((rotationAngle[1]%360)/90)*90;
+                angleKeys[1] = 0;
+                for (var j=Math.round((rotationAngle[1]%360)/90);j>0;j--){
+                    cubeBlockStatus = rotationX(2,cubeBlockStatus);
                 }
+                console.log(cubeBlockStatus);
                 break;
         }
     }
