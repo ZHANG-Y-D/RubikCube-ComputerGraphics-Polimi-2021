@@ -37,7 +37,7 @@ var keys = [];
 var rvx = 0.0;
 var rvy = 0.0;
 var rvz = 0.0;
-var angleKeys = 0.0;
+
 
 var cubeBlockStatus=
     [
@@ -57,9 +57,13 @@ var cubeBlockStatus=
             [23,20,17]
         ]
     ]
+//0-9
+var nowControlAscept = 0;
+// R=0 L=1
+var angleKeys = [0.0,0.0,0.0,0.0];
 
+var rotationAngle=[0.0,0.0,0.0,0.0];
 
-var rotationAngle=0.0;
-var rotationAxis='X';
+var rotationAxis;
 var operationBlocks=[-1];
 

@@ -875,7 +875,7 @@ function drawScene(){
 
 	// update World matrix
 	updateBlocksWorldMatrix();
-
+	//
 	// update WV matrix
 	angle = angle + rvy;
 	elevation = elevation + rvx;
