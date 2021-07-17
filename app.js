@@ -875,7 +875,7 @@ async function drawInAsync(){
 function drawScene(){
 
 	// update World matrix
-	updateBlocksWorldMatrix();
+	// updateBlocksWorldMatrix();
 	//
 	// update WV matrix
 	angle = angle + rvy;

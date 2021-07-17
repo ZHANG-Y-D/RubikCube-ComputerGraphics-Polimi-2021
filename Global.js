@@ -61,7 +61,7 @@ var cubeBlockStatus=
         ]
     ]
 //0-9
-var nowControlAscept = 0;
+var nowControlAspect = 0;
 // R=0 L=1
 var angleKeys = [0.0,0.0,0.0,0.0];
 
