@@ -14,6 +14,7 @@
 // 					break;
 // 				case "Y":
 // 					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateYMatrix(rotationAngle[nowControlAspect]));
+
 // 					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle[nowControlAspect]),cubeWorldMatrixPrevious[n]);
 // 					break;
 // 				case "Z":
