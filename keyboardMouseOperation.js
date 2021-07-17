@@ -78,14 +78,11 @@ var keyFunctionUp =function(e) {
                 for (var n = 0; n < 26; n++) {
 
                     if (operationBlocks.includes(n)) {
-                        // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]));
-                        //视图更新
-
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(270), cubeWorldMatrix[n]);
+                        //Update view
+                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(-90), cubeWorldMatrix[n]);
                     }
                 }
-                // console.log(cubeWorldMatrix[0]);
-                console.log(cubeBlockStatus);
+
                 break;
 
                 break;
@@ -93,20 +90,11 @@ var keyFunctionUp =function(e) {
             case 85: //U
                 //TODO
                 // console.log(cubeWorldMatrix[0]);
-                //rotationAngle[1]=0
-                //cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
-                console.log(operationBlocks);
                 for (var n = 0; n < 26; n++) {
-
                     if (operationBlocks.includes(n)) {
-                        // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]));
-                        //视图更新
-
                         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(-90), cubeWorldMatrix[n]);
                     }
                 }
-                // console.log(cubeWorldMatrix[0]);
-                 console.log(cubeBlockStatus);
                 break;
 
 
@@ -128,15 +116,11 @@ var keyFunctionUp =function(e) {
                 //TODO
                 console.log(operationBlocks);
                 for (var n = 0; n < 26; n++) {
-                    //
                     if(operationBlocks.includes(n)){
-                    //     // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]));
-                    //     //视图更新
-                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(90), cubeWorldMatrix[n]);
+                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(-90), cubeWorldMatrix[n]);
+                    }
                 }
-                }
-                // console.log(cubeWorldMatrix[0]);
-                 console.log(cubeBlockStatus);
+
                 break;
         }
     }

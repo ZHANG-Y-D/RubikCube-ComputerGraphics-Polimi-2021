@@ -28,22 +28,22 @@
 // }
 
 
-
+//clockwise
 //R:i=2, M:i=1, L:i=0
 function rotationX(i,cubeBlockStatusInuse) {
 	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
 
-	tempCube[0][2][i] = cubeBlockStatusInuse[0][0][i];
-	tempCube[1][2][i] = cubeBlockStatusInuse[0][1][i];
-	tempCube[2][2][i] = cubeBlockStatusInuse[0][2][i];
+	tempCube[2][0][i] = cubeBlockStatusInuse[0][0][i];
+	tempCube[1][0][i] = cubeBlockStatusInuse[0][1][i];
+	tempCube[0][0][i] = cubeBlockStatusInuse[0][2][i];
 
-	tempCube[0][1][i] = cubeBlockStatusInuse[1][0][i];
+	tempCube[2][1][i] = cubeBlockStatusInuse[1][0][i];
 	tempCube[1][1][i] =	cubeBlockStatusInuse[1][1][i];
-	tempCube[2][1][i] = cubeBlockStatusInuse[1][2][i];
+	tempCube[0][1][i] = cubeBlockStatusInuse[1][2][i];
 
-	tempCube[0][0][i] = cubeBlockStatusInuse[2][0][i];
-	tempCube[1][0][i] = cubeBlockStatusInuse[2][1][i];
-	tempCube[2][0][i] = cubeBlockStatusInuse[2][2][i];
+	tempCube[2][2][i] = cubeBlockStatusInuse[2][0][i];
+	tempCube[1][2][i] = cubeBlockStatusInuse[2][1][i];
+	tempCube[0][2][i] = cubeBlockStatusInuse[2][2][i];
 
 	return tempCube;
 }
@@ -77,7 +77,7 @@ function rotationYOperationBlocks(i,cubeBlockStatusInuse) {
 
 
 //U:i=0, E:i=1, D:i=2
-//ANTI-clockwise
+//Clockwise
 function rotationY(i,cubeBlockStatusInuse){
 	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
 	tempCube[i][0][2] = cubeBlockStatusInuse[i][0][0];
@@ -98,7 +98,7 @@ function rotationY(i,cubeBlockStatusInuse){
 
 
 
-
+//clockwise
 //U:B=0, E:S=1, D:F=2
 function rotationZ(i,cubeBlockStatusInuse){
 	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
