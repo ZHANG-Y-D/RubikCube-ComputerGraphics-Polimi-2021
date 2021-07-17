@@ -1,10 +1,6 @@
 var keyFunctionDown =function(e) {
-    if(!keys[e.keyCode]) {
+    if(!keys[e.keyCode] && !sync) {
         keys[e.keyCode] = true;
-        console.log(sync);
-        // if(!sync){
-        //     sync = true;
-        //     console.log(sync);
         switch(e.keyCode) {
             case 37:
                 //console.log("KeyUp   - Dir LEFT");
@@ -22,58 +18,134 @@ var keyFunctionDown =function(e) {
                 //console.log("KeyUp   - Dir DOWN");
                 rvx = rvx - 1.0;
                 break;
+            case 66: //B
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationZOperationBlocks(0, cubeBlockStatus);
+                rotationAxis = 'Z';
+                angleKeys = angleKeys + 0.1;
+                break;
+
+            case 68: //D
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationYOperationBlocks(2, cubeBlockStatus);
+                rotationAxis = 'Y';
+                angleKeys = angleKeys + 0.1;
+                break;
+
+            case 77: //M
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationXOperationBlocks(1, cubeBlockStatus);
+                rotationAxis = 'X';
+                angleKeys = angleKeys + 0.1;
+                break;
+
+            case 69: //E
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationYOperationBlocks(1, cubeBlockStatus);
+                rotationAxis = 'Y';
+                angleKeys = angleKeys + 0.1;
+                break;
+
+            case 83: //S
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationZOperationBlocks(1, cubeBlockStatus);
+                rotationAxis = 'Z';
+                angleKeys = angleKeys - 0.1;
+                break;
 
             case 70: //F
-                console.log(cubeBlockStatus);
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
                 operationBlocks = rotationZOperationBlocks(2, cubeBlockStatus);
-                cubeBlockStatus = rotationZ(2, cubeBlockStatus);
-                console.log("F在按住");
+                rotationAxis = 'Z';
+                angleKeys = angleKeys - 0.1;
+                break;
 
-                for (var n = 0; n < 26; n++) {
-                    if (operationBlocks.includes(n)) {
-                        //Update view
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(-90), cubeWorldMatrix[n]);
-                    }
-                }
+            case 76: //L
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationXOperationBlocks(0, cubeBlockStatus);
+                rotationAxis = 'X';
+                angleKeys = angleKeys + 0.1;
                 break;
 
             case 85: //U
-                console.log(cubeBlockStatus);
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
                 operationBlocks = rotationYOperationBlocks(0, cubeBlockStatus);
-                cubeBlockStatus = rotationY(0, cubeBlockStatus);
-                for (var n = 0; n < 26; n++) {
-                    if (operationBlocks.includes(n)) {
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(-90), cubeWorldMatrix[n]);
-                    }
-                }
-
+                rotationAxis = 'Y';
+                angleKeys = angleKeys - 0.1;
                 break;
-
-            // case 76: //L
-            //     rotationAxis = 'X';
-            //     nowControlAscept = 0;
-            //     angleKeys[0] = angleKeys[0] + 0.1;
-            //
-            //     // operationBlocks = [cubeBlockStatus[0][2][2],cubeBlockStatus[0][1][2],cubeBlockStatus[0][0][2],
-            //     //                     cubeBlockStatus[1][2][2],cubeBlockStatus[1][1][2],cubeBlockStatus[1][0][2],
-            //     //                     cubeBlockStatus[2][2][2],cubeBlockStatus[2][1][2],cubeBlockStatus[2][0][2]];
-            //     operationBlocks = rotationXOperationBlocks(0,cubeBlockStatus);
-            //     break;
 
             case 82: //R
-                // console.log(sync);
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
                 operationBlocks = rotationXOperationBlocks(2, cubeBlockStatus);
-                cubeBlockStatus = rotationX(2, cubeBlockStatus);
-                console.log("R在按住");
-
-                for (var n = 0; n < 26; n++) {
-                    if(operationBlocks.includes(n)){
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(-90), cubeWorldMatrix[n]);
-                    }
-                }
+                rotationAxis = 'X';
+                angleKeys = angleKeys - 0.1;
                 break;
+
+            case 88: //X
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationXOperationBlocks(0, cubeBlockStatus);
+                operationBlocks = rotationXOperationBlocks(1, cubeBlockStatus)+operationBlocks;
+                operationBlocks = rotationXOperationBlocks(2, cubeBlockStatus)+operationBlocks;
+                rotationAxis = 'X';
+                angleKeys = angleKeys - 0.1;
+                break;
+
+            case 89: //Y
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationYOperationBlocks(0, cubeBlockStatus);
+                operationBlocks = rotationYOperationBlocks(1, cubeBlockStatus)+operationBlocks;
+                operationBlocks = rotationYOperationBlocks(2, cubeBlockStatus)+operationBlocks;
+                rotationAxis = 'Y';
+                angleKeys = angleKeys - 0.1;
+                break;
+
+            case 90: //Z
+                sync = true;
+                isAnimating=true;
+                rotationAngle=0;
+                cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                operationBlocks = rotationZOperationBlocks(0, cubeBlockStatus);
+                operationBlocks = rotationZOperationBlocks(1, cubeBlockStatus)+operationBlocks;
+                operationBlocks = rotationZOperationBlocks(2, cubeBlockStatus)+operationBlocks;
+                rotationAxis = 'Z';
+                angleKeys = angleKeys - 0.1;
+                break;
+            default:
+                console.log("This key does not work")
         }
-        // }
     }
 }
 
@@ -98,55 +170,144 @@ var keyFunctionUp =function(e) {
                 rvx = rvx + 1.0;
                 break;
 
-            case 70:
-                //console.log(operationBlocks);
-                // for (var n = 0; n < 26; n++) {
-                //
-                //     if (operationBlocks.includes(n)) {
-                //         //Update view
-                //         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(-90), cubeWorldMatrix[n]);
-                //     }
-                // }
-                sync = false;
-                console.log("F已怂");
+            case 70: //F
+                isAnimating=false;
 
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    cubeBlockStatus = rotationZ(2, cubeBlockStatus);
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle%360)/90)*90);
+                angleKeys = 0;
+                sync = false;
                 break;
 
             case 85: //U
-                //TODO
-                // console.log(cubeWorldMatrix[0]);
-
-                //sync = false;
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    cubeBlockStatus = rotationY(0, cubeBlockStatus);
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
                 break;
 
-
-            // case 76: //L
-            // //TODO
-            // //console.log(cubeBlockStatus);
-            // nowControlAscept = 0;
-            // // rotationAngle[0]=Math.round((rotationAngle[0]%360)/90)*90;
-            // angleKeys[0] = 0;
-            // for (var j=Math.round((rotationAngle[0]%360)/90);j>0;j--){
-            //     cubeBlockStatus = rotationX(0,cubeBlockStatus);
-            //     console.log(j)
-            // }
-            // console.log(cubeBlockStatus);
-            // break;
-
+            case 76: //L
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    for (var i = 0; i < 3; i++) {
+                        cubeBlockStatus = rotationX(0, cubeBlockStatus);
+                    }
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
 
             case 82: //R
-                //TODO
-                // console.log(operationBlocks);
-                // for (var n = 0; n < 26; n++) {
-                //     if(operationBlocks.includes(n)){
-                //     cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(-90), cubeWorldMatrix[n]);
-                //     }
-                // }
-
-
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    cubeBlockStatus = rotationX(2, cubeBlockStatus);
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
                 sync = false;
-                console.log("R已怂");
                 break;
+
+            case 66: //B
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    for (var i = 0; i < 3; i++) {
+                        cubeBlockStatus = rotationZ(0, cubeBlockStatus);
+                    }
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+
+            case 68: //D
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    for (var i = 0; i < 3; i++) {
+                        cubeBlockStatus = rotationY(2, cubeBlockStatus);
+                    }
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+
+            case 77: //M
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    for (var i = 0; i < 3; i++) {
+                        cubeBlockStatus = rotationX(1, cubeBlockStatus);
+                    }
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+
+            case 69: //E
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    for (var i = 0; i < 3; i++) {
+                        cubeBlockStatus = rotationY(1, cubeBlockStatus);
+                    }
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+
+            case 83: //S
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    cubeBlockStatus = rotationZ(1, cubeBlockStatus);
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+
+            case 88: //X
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    cubeBlockStatus = rotationX(0, cubeBlockStatus);
+                    cubeBlockStatus = rotationX(1, cubeBlockStatus);
+                    cubeBlockStatus = rotationX(2, cubeBlockStatus);
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+
+            case 89: //Y
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    cubeBlockStatus = rotationY(0, cubeBlockStatus);
+                    cubeBlockStatus = rotationY(1, cubeBlockStatus);
+                    cubeBlockStatus = rotationY(2, cubeBlockStatus);
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+
+            case 90: //Z
+                isAnimating=false;
+                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
+                    cubeBlockStatus = rotationZ(0, cubeBlockStatus);
+                    cubeBlockStatus = rotationZ(1, cubeBlockStatus);
+                    cubeBlockStatus = rotationZ(2, cubeBlockStatus);
+                }
+                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
+                angleKeys = 0;
+                sync = false;
+                break;
+            default:
+                console.log("This key does not work")
         }
     }
 }

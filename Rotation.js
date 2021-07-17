@@ -1,35 +1,61 @@
 
 
-// function updateBlocksWorldMatrix() {
-//
-// 	//TODO Make the world matrix
-// 	for(var n = 0; n < 26; n++)
-// 	{
-// 		if(operationBlocks.includes(n)){
-// 			rotationAngle[nowControlAspect] = rotationAngle[nowControlAspect] + angleKeys[nowControlAspect];
-// 			switch (rotationAxis) {
-// 				case "X":
-// 					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAspect]));
-// 					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle[nowControlAspect]),cubeWorldMatrixPrevious[n]);
-// 					break;
-// 				case "Y":
-// 					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateYMatrix(rotationAngle[nowControlAspect]));
+function updateBlocksWorldMatrixForAnimation() {
 
-// 					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle[nowControlAspect]),cubeWorldMatrixPrevious[n]);
-// 					break;
-// 				case "Z":
-// 					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateZMatrix(rotationAngle));
-// 					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle[nowControlAspect]),cubeWorldMatrixPrevious[n]);
-// 					break;
-// 			}
-//
-// 		}
-// 	}
+	//Make the world matrix
+    if (isAnimating){
+        for(var n = 0; n < 26; n++)
+        {
+            if(operationBlocks.includes(n)){
+                rotationAngle = rotationAngle + angleKeys;
+                if (rotationAngle>=130){
+                    rotationAngle = 130;
+                }else if(rotationAngle<=-130){
+                    rotationAngle = -130;
+                }
+                switch (rotationAxis) {
+                    case "X":
+                        // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAspect]));
+                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+                        break;
+                    case "Y":
+                        // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateYMatrix(rotationAngle[nowControlAspect]));
 
-// }
+                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+                        break;
+                    case "Z":
+                        // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateZMatrix(rotationAngle));
+                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+                        break;
+                }
+
+            }
+        }
+    }
+}
 
 
-//clockwise
+function updateBlocksWorldMatrixForCommitOperation(rotationAngle) {
+    console.log(rotationAngle)
+    for (var n = 0; n < 26; n++) {
+        if (operationBlocks.includes(n)) {
+            switch (rotationAxis) {
+                case "X":
+                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+                    break;
+                case "Y":
+                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+                    break;
+                case "Z":
+                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+                    break;
+            }
+        }
+    }
+}
+
+
+//Clockwise from X Axis
 //R:i=2, M:i=1, L:i=0
 function rotationX(i,cubeBlockStatusInuse) {
 	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
@@ -49,36 +75,10 @@ function rotationX(i,cubeBlockStatusInuse) {
 	return tempCube;
 }
 
-function rotationXOperationBlocks(i,cubeBlockStatusInUse) {
-
-	return [cubeBlockStatusInUse[0][2][i],
-		cubeBlockStatusInUse[1][2][i],
-		cubeBlockStatusInUse[2][2][i],
-		cubeBlockStatusInUse[0][1][i],
-		cubeBlockStatusInUse[1][1][i],
-		cubeBlockStatusInUse[2][1][i],
-		cubeBlockStatusInUse[0][0][i],
-		cubeBlockStatusInUse[1][0][i],
-		cubeBlockStatusInUse[2][0][i]];
-}
-
-
-function rotationYOperationBlocks(i,cubeBlockStatusInuse) {
-
-	return [cubeBlockStatusInuse[i][0][2],
-		cubeBlockStatusInuse[i][1][2],
-		cubeBlockStatusInuse[i][2][2],
-		cubeBlockStatusInuse[i][0][1],
-		cubeBlockStatusInuse[i][1][1],
-		cubeBlockStatusInuse[i][2][1],
-		cubeBlockStatusInuse[i][0][0],
-		cubeBlockStatusInuse[i][1][0],
-		cubeBlockStatusInuse[i][2][0]];
-}
 
 
 //U:i=0, E:i=1, D:i=2
-//Clockwise
+//Clockwise from Axis Y
 function rotationY(i,cubeBlockStatusInuse){
 	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
 	tempCube[i][0][2] = cubeBlockStatusInuse[i][0][0];
@@ -95,11 +95,7 @@ function rotationY(i,cubeBlockStatusInuse){
 	return tempCube;
 }
 
-
-
-
-
-//clockwise
+//Clockwise
 //U:B=0, E:S=1, D:F=2
 function rotationZ(i,cubeBlockStatusInuse){
 	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
@@ -116,14 +112,25 @@ function rotationZ(i,cubeBlockStatusInuse){
 	tempCube[2][i][0] = cubeBlockStatusInuse[2][i][2];
 	return tempCube;
 }
+
+function rotationXOperationBlocks(i,cubeBlockStatusInUse) {
+
+	return [cubeBlockStatusInUse[0][2][i], cubeBlockStatusInUse[1][2][i], cubeBlockStatusInUse[2][2][i],
+		cubeBlockStatusInUse[0][1][i], cubeBlockStatusInUse[1][1][i], cubeBlockStatusInUse[2][1][i],
+		cubeBlockStatusInUse[0][0][i], cubeBlockStatusInUse[1][0][i], cubeBlockStatusInUse[2][0][i]];
+}
+
+
+function rotationYOperationBlocks(i,cubeBlockStatusInuse) {
+
+	return [cubeBlockStatusInuse[i][0][2], cubeBlockStatusInuse[i][1][2], cubeBlockStatusInuse[i][2][2],
+		cubeBlockStatusInuse[i][0][1], cubeBlockStatusInuse[i][1][1], cubeBlockStatusInuse[i][2][1],
+		cubeBlockStatusInuse[i][0][0], cubeBlockStatusInuse[i][1][0], cubeBlockStatusInuse[i][2][0]];
+}
+
+
 function rotationZOperationBlocks (i,cubeBlockStatusInuse){
-	return [cubeBlockStatusInuse[0][i][2],
-	cubeBlockStatusInuse[1][i][2],
-	cubeBlockStatusInuse[2][i][2],
-	cubeBlockStatusInuse[0][i][1],
-	cubeBlockStatusInuse[1][i][1],
-	cubeBlockStatusInuse[2][i][1],
-	cubeBlockStatusInuse[0][i][0],
-	cubeBlockStatusInuse[1][i][0],
-	cubeBlockStatusInuse[2][i][0]];
+	return [cubeBlockStatusInuse[0][i][2], cubeBlockStatusInuse[1][i][2], cubeBlockStatusInuse[2][i][2],
+	cubeBlockStatusInuse[0][i][1], cubeBlockStatusInuse[1][i][1], cubeBlockStatusInuse[2][i][1],
+	cubeBlockStatusInuse[0][i][0], cubeBlockStatusInuse[1][i][0], cubeBlockStatusInuse[2][i][0]];
 }

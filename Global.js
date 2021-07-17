@@ -60,12 +60,11 @@ var cubeBlockStatus=
             [23,20,17]
         ]
     ]
-//0-9
-var nowControlAspect = 0;
-// R=0 L=1
-var angleKeys = [0.0,0.0,0.0,0.0];
 
-var rotationAngle=[0.0,0.0,0.0,0.0];
+var angleKeys =0;
+
+var rotationAngle=0;
 
 var rotationAxis;
 var operationBlocks=[-1];
+var isAnimating=false;
