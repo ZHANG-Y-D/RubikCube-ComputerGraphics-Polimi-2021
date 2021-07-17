@@ -6,25 +6,24 @@ function updateBlocksWorldMatrix() {
 	for(var n = 0; n < 26; n++)
 	{
 		if(operationBlocks.includes(n)){
-			rotationAngle[nowControlAscept] = rotationAngle[nowControlAscept] + angleKeys[nowControlAscept];
+			rotationAngle[nowControlAspect] = rotationAngle[nowControlAspect] + angleKeys[nowControlAspect];
 			switch (rotationAxis) {
 				case "X":
-					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]));
-					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]),cubeWorldMatrixPrevious[n]);
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]));
+					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle[nowControlAspect]),cubeWorldMatrixPrevious[n]);
 					break;
 				case "Y":
-					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateYMatrix(rotationAngle[nowControlAscept]));
-					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle[nowControlAscept]),cubeWorldMatrixPrevious[n]);
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateYMatrix(rotationAngle[nowControlAscept]));
+					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle[nowControlAspect]),cubeWorldMatrixPrevious[n]);
 					break;
 				case "Z":
-					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateZMatrix(rotationAngle));
-					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle[nowControlAscept]),cubeWorldMatrixPrevious[n]);
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateZMatrix(rotationAngle));
+					// cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle[nowControlAspect]),cubeWorldMatrixPrevious[n]);
 					break;
 			}
 
 		}
 	}
-
 }
 
 
@@ -83,10 +82,6 @@ function rotationY(i,cubeBlockStatusInuse){
 	cubeBlockStatusInuse = tempCube;
 	return cubeBlockStatusInuse;
 }
-
-
-
-
 
 
 
