@@ -40,7 +40,7 @@ var keys = [];
 var rvx = 0.0;
 var rvy = 0.0;
 var rvz = 0.0;
-
+var sync = false;
 
 var cubeBlockStatus=
     [
