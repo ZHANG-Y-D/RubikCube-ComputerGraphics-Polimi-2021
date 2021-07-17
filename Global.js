@@ -67,3 +67,5 @@ var rotationAngle=[0.0,0.0,0.0,0.0];
 var rotationAxis;
 var operationBlocks=[-1];
 
+var cubeBlockStatusTemporary=[-1];
+var cubeWorldMatrixPrevious=[];
