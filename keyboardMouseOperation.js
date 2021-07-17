@@ -18,8 +18,15 @@ var keyFunctionDown =function(e) {
                 //console.log("KeyUp   - Dir DOWN");
                 rvx = rvx - 1.0;
                 break;
-            case 85: //U
 
+            case 70: //F
+                console.log(cubeBlockStatus);
+                operationBlocks = rotationZOperationBlocks(2,cubeBlockStatus);
+                cubeBlockStatus = rotationZ(2,cubeBlockStatus);
+                break;
+
+            case 85: //U
+                console.log(cubeBlockStatus);
                 operationBlocks = rotationYOperationBlocks(0,cubeBlockStatus);
                 cubeBlockStatus = rotationY(0,cubeBlockStatus);
                 break;
@@ -36,15 +43,8 @@ var keyFunctionDown =function(e) {
                 break;
 
             case 82: //R
-                // rotationAxis = 'X';
-                // nowControlAscept = 1;
-                // angleKeys[1] = angleKeys[1] + 0.1;
-                //
-                // cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
 
-                // operationBlocks = [cubeBlockStatus[0][2][2],cubeBlockStatus[0][1][2],cubeBlockStatus[0][0][2],
-                //                     cubeBlockStatus[1][2][2],cubeBlockStatus[1][1][2],cubeBlockStatus[1][0][2],
-                //                     cubeBlockStatus[2][2][2],cubeBlockStatus[2][1][2],cubeBlockStatus[2][0][2]];
+                console.log(cubeBlockStatus);
                 operationBlocks = rotationXOperationBlocks(2,cubeBlockStatus);
                 cubeBlockStatus = rotationX(2,cubeBlockStatus);
                 break;
@@ -73,27 +73,40 @@ var keyFunctionUp =function(e) {
                 rvx = rvx + 1.0;
                 break;
 
-
-            case 85: //U
-                //TODO
-                console.log(cubeWorldMatrix[0]);
-                //rotationAngle[1]=0
-                //cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
-
-
+            case 70:
+                console.log(operationBlocks);
                 for (var n = 0; n < 26; n++) {
 
                     if (operationBlocks.includes(n)) {
                         // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]));
                         //视图更新
 
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(90), cubeWorldMatrix[n]);
-
+                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(270), cubeWorldMatrix[n]);
                     }
-
                 }
-                console.log(cubeWorldMatrix[0]);
+                // console.log(cubeWorldMatrix[0]);
                 console.log(cubeBlockStatus);
+                break;
+
+                break;
+
+            case 85: //U
+                //TODO
+                // console.log(cubeWorldMatrix[0]);
+                //rotationAngle[1]=0
+                //cubeWorldMatrixPrevious = JSON.parse(JSON.stringify(cubeWorldMatrix));
+                console.log(operationBlocks);
+                for (var n = 0; n < 26; n++) {
+
+                    if (operationBlocks.includes(n)) {
+                        // cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(rotationAngle[nowControlAscept]));
+                        //视图更新
+
+                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(-90), cubeWorldMatrix[n]);
+                    }
+                }
+                // console.log(cubeWorldMatrix[0]);
+                 console.log(cubeBlockStatus);
                 break;
 
 
@@ -113,8 +126,7 @@ var keyFunctionUp =function(e) {
 
             case 82: //R
                 //TODO
-                console.log(cubeWorldMatrix[0]);
-
+                console.log(operationBlocks);
                 for (var n = 0; n < 26; n++) {
                     //
                     if(operationBlocks.includes(n)){
@@ -123,8 +135,8 @@ var keyFunctionUp =function(e) {
                     cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(90), cubeWorldMatrix[n]);
                 }
                 }
-                console.log(cubeWorldMatrix[0]);
-                console.log(cubeBlockStatus);
+                // console.log(cubeWorldMatrix[0]);
+                 console.log(cubeBlockStatus);
                 break;
         }
     }

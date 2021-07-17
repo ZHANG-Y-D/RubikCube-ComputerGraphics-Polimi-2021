@@ -64,14 +64,20 @@ function rotationXOperationBlocks(i,cubeBlockStatusInUse) {
 
 function rotationYOperationBlocks(i,cubeBlockStatusInuse) {
 
-	return [cubeBlockStatusInuse[i][0][2], cubeBlockStatusInuse[i][1][2], cubeBlockStatusInuse[i][2][2],
-		cubeBlockStatusInuse[i][0][1], cubeBlockStatusInuse[i][1][1],cubeBlockStatusInuse[i][2][1],
-		cubeBlockStatusInuse[i][0][0],cubeBlockStatusInuse[i][1][0],cubeBlockStatusInuse[i][2][0]];
+	return [cubeBlockStatusInuse[i][0][2],
+		cubeBlockStatusInuse[i][1][2],
+		cubeBlockStatusInuse[i][2][2],
+		cubeBlockStatusInuse[i][0][1],
+		cubeBlockStatusInuse[i][1][1],
+		cubeBlockStatusInuse[i][2][1],
+		cubeBlockStatusInuse[i][0][0],
+		cubeBlockStatusInuse[i][1][0],
+		cubeBlockStatusInuse[i][2][0]];
 }
 
 
-
 //U:i=0, E:i=1, D:i=2
+//ANTI-clockwise
 function rotationY(i,cubeBlockStatusInuse){
 	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
 	tempCube[i][0][2] = cubeBlockStatusInuse[i][0][0];
@@ -93,22 +99,30 @@ function rotationY(i,cubeBlockStatusInuse){
 
 
 
-
-
 //U:B=0, E:S=1, D:F=2
-function rotationZ(i){
-	var tempCube = cubeBlockStatus;
-	tempCube[0][i][2] = cubeBlockStatus[0][i][0];
-	tempCube[1][i][2] = cubeBlockStatus[0][i][1];
-	tempCube[2][i][2] = cubeBlockStatus[0][i][2];
+function rotationZ(i,cubeBlockStatusInuse){
+	var tempCube = JSON.parse(JSON.stringify(cubeBlockStatusInuse));
+	tempCube[0][i][2] = cubeBlockStatusInuse[0][i][0];
+	tempCube[1][i][2] = cubeBlockStatusInuse[0][i][1];
+	tempCube[2][i][2] = cubeBlockStatusInuse[0][i][2];
 
-	tempCube[0][i][1] = cubeBlockStatus[1][i][0];
-	tempCube[1][i][1] = cubeBlockStatus[1][i][1];
-	tempCube[2][i][1] = cubeBlockStatus[1][i][2];
+	tempCube[0][i][1] = cubeBlockStatusInuse[1][i][0];
+	tempCube[1][i][1] = cubeBlockStatusInuse[1][i][1];
+	tempCube[2][i][1] = cubeBlockStatusInuse[1][i][2];
 
-	tempCube[0][i][0] = cubeBlockStatus[2][i][0];
-	tempCube[1][i][0] = cubeBlockStatus[2][i][1];
-	tempCube[2][i][0] = cubeBlockStatus[2][i][2];
-
-	cubeBlockStatus = tempCube
+	tempCube[0][i][0] = cubeBlockStatusInuse[2][i][0];
+	tempCube[1][i][0] = cubeBlockStatusInuse[2][i][1];
+	tempCube[2][i][0] = cubeBlockStatusInuse[2][i][2];
+	return tempCube;
+}
+function rotationZOperationBlocks (i,cubeBlockStatusInuse){
+	return [cubeBlockStatusInuse[0][i][2],
+	cubeBlockStatusInuse[1][i][2],
+	cubeBlockStatusInuse[2][i][2],
+	cubeBlockStatusInuse[0][i][1],
+	cubeBlockStatusInuse[1][i][1],
+	cubeBlockStatusInuse[2][i][1],
+	cubeBlockStatusInuse[0][i][0],
+	cubeBlockStatusInuse[1][i][0],
+	cubeBlockStatusInuse[2][i][0]];
 }
