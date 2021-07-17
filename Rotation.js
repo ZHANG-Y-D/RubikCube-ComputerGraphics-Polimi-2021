@@ -51,15 +51,17 @@ function rotationX(i,cubeBlockStatusInuse) {
 
 function rotationXOperationBlocks(i,cubeBlockStatusInUse) {
 
-	return [cubeBlockStatusInUse[0][2][i],
-		cubeBlockStatusInUse[1][2][i],
-		cubeBlockStatusInUse[2][2][i],
-		cubeBlockStatusInUse[0][1][i],
-		cubeBlockStatusInUse[1][1][i],
-		cubeBlockStatusInUse[2][1][i],
-		cubeBlockStatusInUse[0][0][i],
-		cubeBlockStatusInUse[1][0][i],
-		cubeBlockStatusInUse[2][0][i]];
+	return [cubeBlockStatusInUse[0][2][i], cubeBlockStatusInUse[1][2][i], cubeBlockStatusInUse[2][2][i],
+		cubeBlockStatusInUse[0][1][i], cubeBlockStatusInUse[1][1][i], cubeBlockStatusInUse[2][1][i],
+		cubeBlockStatusInUse[0][0][i], cubeBlockStatusInUse[1][0][i], cubeBlockStatusInUse[2][0][i]];
+}
+
+
+function rotationYOperationBlocks(i,cubeBlockStatusInuse) {
+
+	return [cubeBlockStatusInuse[i][0][2], cubeBlockStatusInuse[i][1][2], cubeBlockStatusInuse[i][2][2],
+		cubeBlockStatusInuse[i][0][1], cubeBlockStatusInuse[i][1][1],cubeBlockStatusInuse[i][2][1],
+		cubeBlockStatusInuse[i][0][0],cubeBlockStatusInuse[i][1][0],cubeBlockStatusInuse[i][2][0]];
 }
 
 
@@ -84,11 +86,7 @@ function rotationY(i,cubeBlockStatusInuse){
 
 
 
-function rotationYOperationBlocks(i,cubeBlockStatusInuse) {
 
-	return [cubeBlockStatusInuse[i][0][2],cubeBlockStatusInuse[i][1][2],cubeBlockStatusInuse[i][2][2],cubeBlockStatusInuse[i][0][1],cubeBlockStatusInuse[i][1][1],cubeBlockStatusInuse[i][2][1],cubeBlockStatusInuse[i][0][0],cubeBlockStatusInuse[i][1][0]
-		,cubeBlockStatusInuse[i][2][0]];
-}
 
 
 

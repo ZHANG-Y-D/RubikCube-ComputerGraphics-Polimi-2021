@@ -20,7 +20,10 @@ var worldScale = 0.3;
 
 var cubeMesh = [];
 
+
+var cubeWorldMatrixPrevious=[];
 var cubeWorldMatrix = [];
+
 
 //Parameters for Camera
 var cx = 0.0;
@@ -68,4 +71,3 @@ var rotationAxis;
 var operationBlocks=[-1];
 
 var cubeBlockStatusTemporary=[-1];
-var cubeWorldMatrixPrevious=[];
