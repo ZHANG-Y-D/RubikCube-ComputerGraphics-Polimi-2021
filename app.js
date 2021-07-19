@@ -1,20 +1,20 @@
-function doResize() {
-    // set canvas dimensions
-	var canvas = document.getElementById("my-canvas");
-    if((window.innerWidth > 40) && (window.innerHeight > 340)) {
-		canvas.width  = window.innerWidth-16;
-		canvas.height = window.innerHeight-280;
-		var w=canvas.clientWidth;
-		var h=canvas.clientHeight;
-		
-		gl.clearColor(0.0, 0.0, 0.0, 1.0);
-		gl.viewport(0.0, 0.0, w, h);
-		gl.clear(gl.COLOR_BUFFER_BIT);
-		
-		perspectiveMatrix = utils.MakePerspective(60, w/h, 0.1, 1000.0);
-
-    }
-}
+// function doResize() {
+//     // set canvas dimensions
+// 	var canvas = document.getElementById("my-canvas");
+//     if((window.innerWidth > 40) && (window.innerHeight > 340)) {
+// 		canvas.width  = window.innerWidth-16;
+// 		canvas.height = window.innerHeight-280;
+// 		var w=canvas.clientWidth;
+// 		var h=canvas.clientHeight;
+//
+// 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
+// 		gl.viewport(0.0, 0.0, w, h);
+// 		gl.clear(gl.COLOR_BUFFER_BIT);
+//
+// 		perspectiveMatrix = utils.MakePerspective(60, w/h, 0.1, 1000.0);
+//
+//     }
+// }
 
 var reqData = [
 	{text: "Lambert diffuse and Ambient material. No specular or emisssion.",
@@ -517,7 +517,8 @@ function resetShaderParams() {
 	lookRadius = 5.0;
 	
 	if(gl) {
-		setWorldMesh();
+		//TODO
+		// setWorldMesh();
 	}
 }
 
@@ -700,7 +701,7 @@ function setShader() {
 	if (!gl.getShaderParameter(v1, gl.COMPILE_STATUS)) {
 		alert("ERROR IN VS SHADER : " + gl.getShaderInfoLog(v1));
 	}
-//console.log(fs1 + ShadersCode[curr_Shader] + fs2);
+	//console.log(fs1 + ShadersCode[curr_Shader] + fs2);
 	var v2 = gl.createShader(gl.FRAGMENT_SHADER);
 	gl.shaderSource(v2, fs1 + ShadersCode[curr_Shader] + fs2)
 	gl.compileShader(v2);		
@@ -728,7 +729,7 @@ function setShader() {
 	}
 }
 
-// The real app starts here
+
 function main(){
 	ShadersCode = shaders();
 	resetShaderParams();
@@ -758,7 +759,7 @@ function main(){
 		curr_Shader = -1;
 		ChangeShader(1);
 
-		//setWorldMesh();
+		// setWorldMesh();
 						
 		// prepares the world, view and projection matrices.
 		var w=canvas.clientWidth;
