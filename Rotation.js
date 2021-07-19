@@ -134,3 +134,4 @@ function rotationZOperationBlocks (i,cubeBlockStatusInuse){
 	cubeBlockStatusInuse[0][i][1], cubeBlockStatusInuse[1][i][1], cubeBlockStatusInuse[2][i][1],
 	cubeBlockStatusInuse[0][i][0], cubeBlockStatusInuse[1][i][0], cubeBlockStatusInuse[2][i][0]];
 }
+
