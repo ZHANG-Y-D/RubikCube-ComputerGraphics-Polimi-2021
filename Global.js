@@ -45,7 +45,8 @@ var keys = [];
 // var rvy = 0.0;
 // var rvz = 0.0;
 var sync = false;
-var mouseState = false;
+var shiftSync = false;
+
 var lastMouseX = -100, lastMouseY = -100;
 
 var cubeBlockStatus=
