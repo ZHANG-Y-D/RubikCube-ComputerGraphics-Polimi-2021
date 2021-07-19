@@ -38,7 +38,8 @@ var roll = 0.01;
 
 var lookRadius = 5.0;
 
-
+var mouseX;
+var mouseY;
 var keys = [];
 var rvx = 0.0;
 var rvy = 0.0;

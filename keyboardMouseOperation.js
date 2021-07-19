@@ -337,8 +337,8 @@ function doMouseUp(event) {
     mouseState = false;
 }
 function mousePositionListener(event) {
-    console.log(event.pageX);
-    console.log(event.pageY);
+    mouseX = event.pageX;
+    mouseY = event.pageY;
 }
 function doMouseMove(event) {
     // if(mouseState) {
