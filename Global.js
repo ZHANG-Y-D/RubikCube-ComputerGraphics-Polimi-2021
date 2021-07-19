@@ -9,6 +9,7 @@ var gl = null,
     skyboxLattx = null,
     skyboxTbtx = null;
 var mesh = [];
+var curr_Shader = 0;
 
 var projectionMatrix,
     perspectiveMatrix,
