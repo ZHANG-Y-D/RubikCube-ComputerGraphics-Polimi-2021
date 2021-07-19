@@ -27,7 +27,6 @@ var keyFunctionDown =function(e) {
                 rotationAxis = 'Z';
                 angleKeys = angleKeys + 0.1;
                 break;
-
             case 68: //D
                 sync = true;
                 isAnimating=true;
@@ -37,7 +36,6 @@ var keyFunctionDown =function(e) {
                 rotationAxis = 'Y';
                 angleKeys = angleKeys + 0.1;
                 break;
-
             case 77: //M
                 sync = true;
                 isAnimating=true;
@@ -47,7 +45,6 @@ var keyFunctionDown =function(e) {
                 rotationAxis = 'X';
                 angleKeys = angleKeys + 0.1;
                 break;
-
             case 69: //E
                 sync = true;
                 isAnimating=true;
@@ -57,7 +54,6 @@ var keyFunctionDown =function(e) {
                 rotationAxis = 'Y';
                 angleKeys = angleKeys + 0.1;
                 break;
-
             case 83: //S
                 sync = true;
                 isAnimating=true;
@@ -67,7 +63,6 @@ var keyFunctionDown =function(e) {
                 rotationAxis = 'Z';
                 angleKeys = angleKeys - 0.1;
                 break;
-
             case 70: //F
                 sync = true;
                 isAnimating=true;
@@ -149,6 +144,8 @@ var keyFunctionDown =function(e) {
     }
 }
 
+
+
 var keyFunctionUp =function(e) {
     if(keys[e.keyCode]) {
         keys[e.keyCode] = false;
@@ -183,6 +180,7 @@ var keyFunctionUp =function(e) {
 
             case 85: //U
                 isAnimating=false;
+
                 if (Math.abs(Math.round((rotationAngle%360)/90))>0){
                     cubeBlockStatus = rotationY(0, cubeBlockStatus);
                 }
@@ -311,3 +309,35 @@ var keyFunctionUp =function(e) {
         }
     }
 }
+
+
+function doMouseDown(event) {
+    lastMouseX = event.pageX;
+    lastMouseY = event.pageY;
+    mouseState = true;
+}
+function doMouseUp(event) {
+    lastMouseX = -100;
+    lastMouseY = -100;
+    mouseState = false;
+}
+function doMouseMove(event) {
+    if(mouseState) {
+        var dx = event.pageX - lastMouseX;
+        var dy = lastMouseY - event.pageY;
+        lastMouseX = event.pageX;
+        lastMouseY = event.pageY;
+
+        if((dx != 0) || (dy != 0)) {
+            angle = angle + 0.5 * dx;
+            elevation = elevation + 0.5 * dy;
+        }
+    }
+}
+function doMouseWheel(event) {
+    var nLookRadius = lookRadius + event.wheelDelta/1000.0;
+    if((nLookRadius > 2.0) && (nLookRadius < 20.0)) {
+        lookRadius = nLookRadius;
+    }
+}
+

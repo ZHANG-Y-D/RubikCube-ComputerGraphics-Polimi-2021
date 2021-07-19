@@ -260,37 +260,6 @@ var fs2 = `
 
 // event handler
 
-var mouseState = false;
-var lastMouseX = -100, lastMouseY = -100;
-function doMouseDown(event) {
-	lastMouseX = event.pageX;
-	lastMouseY = event.pageY;
-	mouseState = true;
-}
-function doMouseUp(event) {
-	lastMouseX = -100;
-	lastMouseY = -100;
-	mouseState = false;
-}
-function doMouseMove(event) {
-	if(mouseState) {
-		var dx = event.pageX - lastMouseX;
-		var dy = lastMouseY - event.pageY;
-		lastMouseX = event.pageX;
-		lastMouseY = event.pageY;
-		
-		if((dx != 0) || (dy != 0)) {
-			angle = angle + 0.5 * dx;
-			elevation = elevation + 0.5 * dy;
-		}
-	}
-}
-function doMouseWheel(event) {
-	var nLookRadius = lookRadius + event.wheelDelta/1000.0;
-	if((nLookRadius > 2.0) && (nLookRadius < 20.0)) {
-		lookRadius = nLookRadius;
-	}
-}
 
 
 // UI helper arrays
