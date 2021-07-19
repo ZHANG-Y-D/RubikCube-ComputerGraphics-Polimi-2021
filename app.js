@@ -1,6 +1,3 @@
-
-
-
 function doResize() {
     // set canvas dimensions
 	var canvas = document.getElementById("my-canvas");
@@ -18,7 +15,6 @@ function doResize() {
 
     }
 }
-
 
 var reqData = [
 	{text: "Lambert diffuse and Ambient material. No specular or emisssion.",
@@ -67,7 +63,6 @@ var reqData = [
 			emissionType: "No"
 	 } }
 ];
-
 
 var curr_Shader = 0;
 
@@ -257,9 +252,6 @@ void main() {
 var fs2 = `	
 	color = vec4(out_color.rgb, 1.0);
 }`;
-
-// event handler
-
 
 
 // UI helper arrays
@@ -516,13 +508,13 @@ function resetShaderParams() {
 		}
 	}
 	
-	cx = 0.0;
-	cy = 0.0;
+	cx = 2.0;
+	cy = 2.0;
 	cz = 6.5;
-	elevation = 0.01;
-	angle = 0.01;
+	elevation = -30.0;
+	angle = 45.0;
 	roll = 0.01;
-	lookRadius = 10.0;
+	lookRadius = 5.0;
 	
 	if(gl) {
 		setWorldMesh();
@@ -747,6 +739,7 @@ function main(){
 	canvas.addEventListener("mouseup", doMouseUp, false);
 	canvas.addEventListener("mousemove", doMouseMove, false);
 	canvas.addEventListener("mousewheel", doMouseWheel, false);
+	canvas.addEventListener("mousewheel", mousePositionListener, false);
 	window.addEventListener("keyup", keyFunctionUp, false);
 	window.addEventListener("keydown", keyFunctionDown, false);
 	window.onresize = doResize;
@@ -836,32 +829,28 @@ function loadMeshAndWorldMatrix(){
 
 }
 
-async function drawInAsync(){
-	return 1;
-}
-
-
 function drawScene(){
 
 	// update World matrix
 	updateBlocksWorldMatrixForAnimation();
 	//
 	// update WV matrix
-	angle = angle + rvy;
-	elevation = elevation + rvx;
+	// angle = angle + rvy;
+	// elevation = elevation + rvx;
 
 	cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
 	cx = lookRadius * Math.sin(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
 	cy = lookRadius * Math.sin(utils.degToRad(-elevation));
 
 	// TODO Fix the Camera!!!
+	//viewMatrix = utils.MakeView(2.9, 2.15, 2.98, -20, -45);
 	viewMatrix = utils.MakeView(cx, cy, cz, elevation, -angle);
-
+	// Magic for moving the car
+	//worldMatrix = utils.MakeScaleMatrix(worldScale);
+	projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewMatrix);
 	for(var i = 0; i < 26; i++)
 	{
-		// Magic for moving the car
-		//worldMatrix = utils.MakeScaleMatrix(worldScale);
-		projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewMatrix);
+
 
 		// draws the request
 		gl.bindBuffer(gl.ARRAY_BUFFER, mesh[i].vertexBuffer);
@@ -879,6 +868,7 @@ function drawScene(){
 
 		gl.uniform1i(program.u_textureUniform, 0);
 		gl.uniform3f(program.eyePosUniform, cx, cy, cz);
+
 		WVPmatrix = utils.multiplyMatrices(projectionMatrix, cubeWorldMatrix[i]);
 		gl.uniformMatrix4fv(program.pMatrixUniform, gl.FALSE, utils.transposeMatrix(WVPmatrix));
 		gl.uniformMatrix4fv(program.wMatrixUniform, gl.FALSE, utils.transposeMatrix(cubeWorldMatrix[i]));

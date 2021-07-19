@@ -26,14 +26,17 @@ var cubeWorldMatrix = [];
 
 
 //Parameters for Camera
-var cx = 0.0;
-var cy = 0.0;
+var cx = 2.0;
+var cy = 2.0;
 var cz = 6.5;
-var elevation = 0.01;
-var angle = 0.01;
+// var elevation = 0.01;
+// var angle = 0.01;
+
+var elevation = -30.0;
+var angle = 45.00;
 var roll = 0.01;
 
-var lookRadius = 10.0;
+var lookRadius = 5.0;
 
 
 var keys = [];
