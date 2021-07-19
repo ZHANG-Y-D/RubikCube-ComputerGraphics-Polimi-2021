@@ -739,14 +739,16 @@ function main(){
 	canvas.addEventListener("mouseup", doMouseUp, false);
 	canvas.addEventListener("mousemove", doMouseMove, false);
 	//canvas.addEventListener("mousewheel", doMouseWheel, false);
-	canvas.addEventListener("mousewheel", mousePositionListener, false);
+
 	window.addEventListener("keyup", keyFunctionUp, false);
 	window.addEventListener("keydown", keyFunctionDown, false);
-	//window.onresize = doResize;
-	// canvas.width  = window.innerWidth-16;
-	// canvas.height = window.innerHeight-280;
-	canvas.width  = 2350;
-	canvas.height = 1000;
+
+	//window.addEventListener("keydown", ctrlKeyFunctionDown, false);
+	window.onresize = doResize;
+	canvas.width  = window.innerWidth-16;
+	canvas.height = window.innerHeight-280;
+	// canvas.width  = 1500;
+	// canvas.height = 1000;
 	try{
 		gl= canvas.getContext("webgl2");
 	} catch(e){
@@ -838,8 +840,7 @@ function drawScene(){
 	// update WV matrix
 	// angle = angle + rvy;
 	// elevation = elevation + rvx;
-	console.log(lastMouseX);
-	console.log(lastMouseY);
+
 
 	cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
 	cx = lookRadius * Math.sin(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
