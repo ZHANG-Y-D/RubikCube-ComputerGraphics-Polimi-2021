@@ -533,9 +533,6 @@ function updateAngleKeys(str,angle){
 return angle;
 }
 
-var mouseState = false;
-var lastMouseX = -100, lastMouseY = -100;
-
 
 function doMouseDown(event) {
     lastMouseX = event.pageX;

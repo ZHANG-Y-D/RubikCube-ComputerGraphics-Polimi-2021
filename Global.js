@@ -16,6 +16,9 @@ var cubeWorldMatrixOriginal = [];
 var cubeWorldMatrixPrevious=[];
 var cubeWorldMatrix = [];
 
+var mouseState = false;
+var lastMouseX = -100,
+    lastMouseY = -100;
 
 //Parameters for Camera
 var cx = 2.0;
