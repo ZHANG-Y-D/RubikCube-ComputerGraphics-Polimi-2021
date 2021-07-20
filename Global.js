@@ -99,6 +99,11 @@ var lightPositionX=-37;
 var lightPositionY=41;
 var lightPositionZ=45;
 
+var lightMoveX=0;
+var lightMoveY=0;
+var lightMoveZ=0;
+
+
 var ambientLightColor= "#555555";
 var diffuseColor= "#00ffff";
 var specularColor= "#ffffff";
@@ -112,3 +117,19 @@ var  lightTarget=61;
 
 var  DTexMix= 100;
 var  SpecShine= 100;
+
+defShaderParams = {
+    ambientLightColor: "#555555",
+    diffuseColor: "#00ffff",
+    specularColor: "#ffffff",
+    ambientMatColor: "#00ffff",
+    emitColor: "#4D4D47",
+    lightColor: "#ffffff",
+    lightPositionX: -37,
+    lightPositionY: 41,
+    lightPositionZ: 45,
+    lightDecay: 0,
+    lightTarget: 61,
+    DTexMix: 100,
+    SpecShine: 100
+}

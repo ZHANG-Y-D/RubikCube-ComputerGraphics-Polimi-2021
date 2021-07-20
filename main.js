@@ -80,7 +80,7 @@ vec3 compLightDir(vec3 LPos) {
 
 // Point Light
 vec4 compLightColor(vec4 lightColor, float LTarget, float LDecay, vec3 LPos) {
-	//lights
+	
 	vec4 pointLightCol = lightColor * pow(LTarget / length(LPos - fs_pos), LDecay);
 	return     pointLightCol;
 }
@@ -138,26 +138,9 @@ void main() {
 	color = vec4(out_color.rgb, 1.0);
 }`;
 
-
-defShaderParams = {
-	ambientLightColor: "#555555",
-	diffuseColor: "#00ffff",
-	specularColor: "#ffffff",
-	ambientMatColor: "#00ffff",
-	emitColor: "#4D4D47",
-	lightColor: "#ffffff",
-	lightPositionX: -37,
-	lightPositionY: 41,
-	lightPositionZ: 45,
-	lightDecay: 0,
-	lightTarget: 61,
-	DTexMix: 100,
-	SpecShine: 100
-}
-
 function resetShaderParams() {
 	for(var name in defShaderParams) {
-		value = defShaderParams[name];
+		const value = defShaderParams[name];
 		window[name] = value;
 	}
 	
@@ -255,7 +238,7 @@ var textureLoaderCallback = function() {
 function main(){
 
 	resetShaderParams();
-	document.getElementById("my-canvas").style.backgroundColor = "#F5F5DC";
+	document.getElementById("my-canvas").style.backgroundColor = "#ffffff";
 	// setup everything else
 	var canvas = document.getElementById("my-canvas");
 	canvas.addEventListener("mousedown", doMouseDown, false);
@@ -274,10 +257,8 @@ function main(){
 	} catch(e){
 		console.log(e);
 	}
-	
 		
 	if(gl){
-
 		// Compile and link shaders
 		program = gl.createProgram();
 		var v1 = gl.createShader(gl.VERTEX_SHADER);
@@ -323,10 +304,10 @@ function main(){
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		perspectiveMatrix = utils.MakePerspective(60, w/h, 0.1, 1000.0);
 
-		
+
 	 	// turn on depth testing
 	    gl.enable(gl.DEPTH_TEST);
-	
+
 		// algin the skybox with the light
 		gLightDir = [-1.0, 0.0, 0.0, 0.0];
 		skyboxWM = utils.MakeRotateYMatrix(135);
@@ -390,10 +371,10 @@ function drawScene(){
 
 	// update World matrix
 	updateBlocksWorldMatrixForAnimation();
-	//
-	// update WV matrix
-	// angle = angle + rvy;
-	// elevation = elevation + rvx;
+
+	//Move the light position
+	lightPositionX = lightPositionX + lightMoveX;
+	lightPositionY = lightPositionY + lightMoveY;
 
 
 	cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));

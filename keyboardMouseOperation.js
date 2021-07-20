@@ -5,6 +5,19 @@ var keyFunctionDown =function(e) {
        // keys[e.shiftKey] = true;
         console.log("shift"+e.shiftKey);
         switch(e.keyCode) {
+            case 38:
+                lightMoveY= lightMoveY + 1;
+                break;
+            case 40:
+                lightMoveY= lightMoveY - 1;
+                break;
+            case 37:
+                lightMoveX= lightMoveY - 1;
+                break;
+            case 39:
+                lightMoveX= lightMoveY + 1;
+                break;
+
             case 66: //B
                 sync = true;
                 isAnimating=true;
@@ -211,6 +224,21 @@ var keyFunctionUp =function(e) {
     if(keys[e.keyCode]) {
         keys[e.keyCode] = false;
         switch(e.keyCode) {
+
+            // case 38:
+            //     lightMoveY= lightMoveY + 10;
+            //     break;
+            // case 40:
+            //     lightMoveY= lightMoveY - 10;
+            //     break;
+            // case 37:
+            //     lightMoveX= lightMoveY + 10;
+            //     break;
+            // case 39:
+            //     lightMoveX= lightMoveY - 10;
+            //     break;
+
+
             case 70: //F
                 //思考一个反向更新
                 isAnimating=false;
