@@ -482,10 +482,10 @@ var keyFunctionUp =function(e) {
 
 function updateAngleKeys(str,angle){
     if(str=="add"){
-        angle = angle + 0.1;
+        angle = angle + 0.3;
     }
     else if (str=="minus"){
-        angle = angle - 0.1;
+        angle = angle - 0.3;
     }
 
 return angle;

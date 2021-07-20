@@ -1,6 +1,6 @@
 //0-17
 function generatorRandomOperation(times){
-
+    resetCubeStatus();
     var randomOperatioinArray = new Array();  //先声明一维
     for(var k=0;k<times;k++){    //一维长度为i,i为变量，可以根据实际情况改变
 
