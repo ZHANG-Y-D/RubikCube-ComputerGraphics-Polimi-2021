@@ -357,13 +357,13 @@ function resetShaderParams() {
 		// }
 	}
 	
-	// cx = 2.0;
-	// cy = 2.0;
-	// cz = 6.5;
-	// elevation = -30.0;
-	// angle = 45.0;
-	// roll = 0.01;
-	// lookRadius = 5.0;
+	cx = 2.0;
+	cy = 2.0;
+	cz = 6.5;
+	elevation = -30.0;
+	angle = 45.0;
+	roll = 0.01;
+	lookRadius = 5.0;
 	//
 	// if(gl) {
 	// 	//TODO
@@ -521,23 +521,20 @@ var textureLoaderCallback = function() {
 function main(){
 
 	resetShaderParams();
-	document.getElementById("my-canvas").style.backgroundColor = "	#F5F5DC";
+	document.getElementById("my-canvas").style.backgroundColor = "#F5F5DC";
 	// setup everything else
 	var canvas = document.getElementById("my-canvas");
 	canvas.addEventListener("mousedown", doMouseDown, false);
 	canvas.addEventListener("mouseup", doMouseUp, false);
 	canvas.addEventListener("mousemove", doMouseMove, false);
-	//canvas.addEventListener("mousewheel", doMouseWheel, false);
+	canvas.addEventListener("mousewheel", doMouseWheel, false);
 
 	window.addEventListener("keyup", keyFunctionUp, false);
 	window.addEventListener("keydown", keyFunctionDown, false);
 
-	//window.addEventListener("keydown", ctrlKeyFunctionDown, false);
 	window.onresize = doResize;
 	canvas.width  = window.innerWidth-16;
 	canvas.height = window.innerHeight-280;
-	// canvas.width  = 1500;
-	// canvas.height = 1000;
 	try{
 		gl= canvas.getContext("webgl2");
 	} catch(e){

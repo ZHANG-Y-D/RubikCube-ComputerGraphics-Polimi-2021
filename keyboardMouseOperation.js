@@ -230,6 +230,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle%360)/90)*90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 85: //U
@@ -250,6 +251,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 76: //L
@@ -270,12 +272,14 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 82: //R
                 isAnimating=false;
-                if(shiftSync) {
+                if(shiftSync&&!keys[e.shiftKey]) {
                     shiftSync = false;
+
                     if (Math.abs(Math.round((rotationAngle%360)/90))>0){
                         cubeBlockStatus = rotationX(2, cubeBlockStatus);
                         cubeBlockStatus = rotationX(2, cubeBlockStatus);
@@ -291,6 +295,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 66: //B
@@ -310,6 +315,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 68: //D
@@ -328,6 +334,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 77: //M
@@ -348,6 +355,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 69: //E
@@ -368,6 +376,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 83: //S
@@ -388,6 +397,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 88: //X
@@ -416,6 +426,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 89: //Y
@@ -443,6 +454,7 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
 
             case 90: //Z
@@ -473,9 +485,11 @@ var keyFunctionUp =function(e) {
                 updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
                 angleKeys = 0;
                 sync = false;
+                keys[e.shiftKey] = false;
                 break;
             default:
-                console.log("This key does not work")
+                console.log("This key does not work");
+                keys[e.shiftKey] = false;
         }
     }
 }
@@ -507,17 +521,17 @@ function doMouseUp(event) {
 }
 
 function doMouseMove(event) {
-    // if(mouseState) {
-    //     var dx = event.pageX - lastMouseX;
-    //     var dy = lastMouseY - event.pageY;
-    //     lastMouseX = event.pageX;
-    //     lastMouseY = event.pageY;
-    //
-    //     if((dx != 0) || (dy != 0)) {
-    //         angle = angle + 0.1 * dx;
-    //         elevation = elevation + 0.1 * dy;
-    //     }
-    // }
+    if(mouseState) {
+        var dx = event.pageX - lastMouseX;
+        var dy = lastMouseY - event.pageY;
+        lastMouseX = event.pageX;
+        lastMouseY = event.pageY;
+
+        if((dx != 0) || (dy != 0)) {
+            angle = angle + 0.3 * dx;
+            elevation = elevation + 0.3 * dy;
+        }
+    }
 }
 function doMouseWheel(event) {
     var nLookRadius = lookRadius + event.wheelDelta/1000.0;
