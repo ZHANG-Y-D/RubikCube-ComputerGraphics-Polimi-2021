@@ -14,11 +14,6 @@
 	</head>
 	
 	<body style="background-color: grey;" onLoad="main();">
-<!--		<center>-->
-<!--			<span onclick="ChangeShader(-1);" id="prevButton" style="display:none; color:red">Previous</span> - -->
-<!--			<span id="p1">Shader request goes here</span> - -->
-<!--			<span onclick="ChangeShader(+1);" id="nextButton" style="color:red">Next</span>-->
-<!--		</center>-->
 		<canvas id="my-canvas" width='800' height='450' style="background-color: black;">
 			Your browser doesn't support the Canvas Element!
 		</canvas>
@@ -32,7 +27,7 @@
 				</select></div></td>
 				<th colspan="2">Ambient</th>
 				<th colspan="2">Diffuse</th>
-<!--				<th colspan="2">Specular</th>-->
+				<th colspan="2">Specular</th>
 			  </tr>
 			  <tr>
 			  	<td rowspan="6">
@@ -53,7 +48,7 @@
 			  	<td><div id="LA21">Pos <i>x</i></div></td>
 			  	<td><div id="LA22"><input type="range" min="-100" max="100" id="LAPosX" value=-37></div></td>
 			  	<td><div id="LA23">Decay &beta;</div></td>
-			  	<td><div id="LA24"><input type="range" min="0" max="2" id="LADecay" value=0></div></td>
+			  	<td><div id="LA24"><input type="range" min="0" max="2" id="lightDecay" value=0></div></td>
 			  </tr>
 			  <tr>
 			  	<td><div id="LA31">Pos <i>y</i></div></td>
@@ -176,35 +171,35 @@
 <!--				  <option value="hemispheric">Hemispheric</option>-->
 				</select></div></td>
 			  	<td><div id="D11"><b>Type</b></div></td>
-			  	<td><div id="D12"><select id="diffuseType" onchange="showHideUI(this.id,this.value);" disabled>
+			  	<td><div id="D12"><select id="diffuseType" onchange="showHideUI(this.id,this.value);">
 <!--				  <option value="none">None</option>-->
 				  <option value="lambert">Lambert</option>
 <!--				  <option value="toon">Toon</option>-->
 				</select></div></td>
-<!--			  	<td><div id="S11"><b>Type</b></div></td>-->
-<!--			  	<td><div id="S12"><select id="specularType" onchange="showHideUI(this.id,this.value);" disabled>-->
-<!--				  <option value="none">None</option>-->
-<!--				  <option value="phong">Phong</option>-->
+			  	<td><div id="S11"><b>Type</b></div></td>
+			  	<td><div id="S12"><select id="specularType" onchange="showHideUI(this.id,this.value);">
+				  <option value="none">None</option>
+				  <option value="phong">Phong</option>
 <!--				  <option value="blinn">Blinn</option>-->
 <!--				  <option value="toonP">Toon (Phong)</option>-->
 <!--				  <option value="toonB">Toon (Blinn)</option>-->
-<!--				</select></div></td>-->
+				</select></div></td>
 			  </tr>
 			  <tr>
 			  	<td><div id="A21">Color</div></td>
 			  	<td><div id="A22"><input type="color" id="ambientLightColor" value="#222222"></div></td>
 			  	<td><div id="D21">Color</div></td>
 			  	<td><div id="D22"><input type="color" id="diffuseColor" value="#FEFBFB"></div></td>
-<!--			  	<td><div id="S21">Color</div></td>-->
-<!--			  	<td><div id="S22"><input type="color" id="specularColor" value="#ffffff"></div></td>-->
+			  	<td><div id="S21">Color</div></td>
+			  	<td><div id="S22"><input type="color" id="specularColor" value="#ffffff"></div></td>
 			  </tr>
 			  <tr>
 <!--			  	<td><div id="A31">Dir &theta;</div></td>-->
 <!--			  	<td><div id="A32"><input type="range" min="0" max="180" id="ADirTheta"></div></td>-->
 			  	<td><div id="D31">Texture</div></td>
 			  	<td><div id="D32"><input type="range" min="0" max="100" id="DTexMix"  value=100></div></td>
-<!--			  	<td><div id="S31">Shiny &gamma;</div></td>-->
-<!--			  	<td><div id="S32"><input type="range" min="1" max="200" id="SpecShine"></div></td>-->
+			  	<td><div id="S31">Shiny &gamma;</div></td>
+			  	<td><div id="S32"><input type="range" min="1" max="200" id="SpecShine"></div></td>
 			  </tr>
 			  <tr>
 <!--			  	<td><div id="A41">Dir &phi;</div></td>-->
@@ -222,8 +217,10 @@
 			  	<td><div id="E12"><select id="emissionType" onchange="showHideUI(this.id,this.value);" disabled>
 				  <option value="No">No</option>
 				  <option value="Yes">Yes</option>
-				</select></div></td>
-			  </tr>			  <tr>
+				</select></div>
+				  <td><div id="S51a">Specularity</div><div id="S51b">Angle</div></td><td><div id="S52"><input type="range" min="0" max="100" id="SspecKwAng"></div></td>
+			  </tr>
+			  <tr>
 			  	<td colspan="2">
 			  	  <div style="text-align:center">
 <!--			  		<span onclick="setEveryMesh();">World</span> - -->

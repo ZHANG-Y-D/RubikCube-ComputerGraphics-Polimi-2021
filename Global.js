@@ -87,10 +87,28 @@ var cubeBlockStatus=
         ]
     ]
 
-var angleKeys =0;
+var angleKeys=0;
 
 var rotationAngle=0;
 
 var rotationAxis;
 var operationBlocks=[-1];
 var isAnimating=false;
+
+var lightPositionX=-37;
+var lightPositionY=41;
+var lightPositionZ=45;
+
+var ambientLightColor= "#555555";
+var diffuseColor= "#00ffff";
+var specularColor= "#ffffff";
+var ambientMatColor= "#00ffff";
+var emitColor= "#4D4D47";
+
+var  lightColor= "#ffffff";
+
+var  lightDecay=0;
+var  lightTarget=61;
+
+var  DTexMix= 100;
+var  SpecShine= 100;
