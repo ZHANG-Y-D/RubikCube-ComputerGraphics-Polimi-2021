@@ -34,7 +34,6 @@ function updateBlocksWorldMatrixForAnimation() {
     }
 }
 
-
 function updateBlocksWorldMatrixForCommitOperation(rotationAngle) {
     console.log(rotationAngle)
     for (var n = 0; n < 26; n++) {
@@ -52,6 +51,25 @@ function updateBlocksWorldMatrixForCommitOperation(rotationAngle) {
             }
         }
     }
+}
+
+function updateBlocksWorldMatrixForRandomOperation(rotationAngle,operationBlocksInuse) {
+	//console.log(rotationAngle)
+	for (var n = 0; n < 26; n++) {
+		if (operationBlocksInuse.includes(n)) {
+			switch (rotationAxis) {
+				case "X":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrix[n]);
+					break;
+				case "Y":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrix[n]);
+					break;
+				case "Z":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrix[n]);
+					break;
+			}
+		}
+	}
 }
 
 

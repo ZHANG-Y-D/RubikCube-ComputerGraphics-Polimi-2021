@@ -21,7 +21,7 @@ var worldScale = 0.3;
 
 var cubeMesh = [];
 
-
+var cubeWorldMatrixOriginal = [];
 var cubeWorldMatrixPrevious=[];
 var cubeWorldMatrix = [];
 
@@ -49,6 +49,24 @@ var sync = false;
 var shiftSync = false;
 
 var lastMouseX = -100, lastMouseY = -100;
+var cubeBlockOriginal=
+    [
+        [
+            [8,5,2],
+            [7,4,1],
+            [6,3,0]
+        ],
+        [
+            [16,13,11],
+            [15,-1,10],
+            [14,12,9]
+        ],
+        [
+            [25,22,19],
+            [24,21,18],
+            [23,20,17]
+        ]
+    ]
 
 var cubeBlockStatus=
     [

@@ -645,6 +645,7 @@ function loadMeshAndWorldMatrix(){
 	for(var i = 0; i < 26; i++)
 	{
 			cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
+			cubeWorldMatrixOriginal[i] = utils.MakeScaleMatrix(worldScale);
 			cubeWorldMatrixPrevious[i] = utils.MakeScaleMatrix(worldScale);
 	}
 

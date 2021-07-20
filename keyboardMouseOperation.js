@@ -64,6 +64,7 @@ var keyFunctionDown =function(e) {
                     angleKeys = updateAngleKeys("minus",angleKeys);
                     shiftSync = true;
                 }
+
                 break;
             case 83: //S
                 sync = true;
@@ -209,7 +210,6 @@ var keyFunctionDown =function(e) {
 var keyFunctionUp =function(e) {
     if(keys[e.keyCode]) {
         keys[e.keyCode] = false;
-
         switch(e.keyCode) {
             case 70: //F
                 //思考一个反向更新
@@ -478,175 +478,14 @@ var keyFunctionUp =function(e) {
                 console.log("This key does not work")
         }
     }
-    if(keys[e.keyCode]) {
-        keys[e.keyCode] = false;
-        switch(e.keyCode) {
-            case 37:
-                //console.log("KeyDown  - Dir LEFT");
-                rvy = rvy + 1.0;
-                break;
-            case 39:
-                //console.log("KeyDown - Dir RIGHT");
-                rvy = rvy - 1.0;
-                break;
-            case 38:
-                //console.log("KeyDown - Dir UP");
-                rvx = rvx - 1.0;
-                break;
-            case 40:
-                //console.log("KeyDown - Dir DOWN");
-                rvx = rvx + 1.0;
-                break;
-
-            case 70: //F
-                isAnimating=false;
-
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    cubeBlockStatus = rotationZ(2, cubeBlockStatus);
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle%360)/90)*90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 85: //U
-                isAnimating=false;
-
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    cubeBlockStatus = rotationY(0, cubeBlockStatus);
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 76: //L
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    for (var i = 0; i < 3; i++) {
-                        cubeBlockStatus = rotationX(0, cubeBlockStatus);
-                    }
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 82: //R
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    cubeBlockStatus = rotationX(2, cubeBlockStatus);
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 66: //B
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    for (var i = 0; i < 3; i++) {
-                        cubeBlockStatus = rotationZ(0, cubeBlockStatus);
-                    }
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 68: //D
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    for (var i = 0; i < 3; i++) {
-                        cubeBlockStatus = rotationY(2, cubeBlockStatus);
-                    }
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 77: //M
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    for (var i = 0; i < 3; i++) {
-                        cubeBlockStatus = rotationX(1, cubeBlockStatus);
-                    }
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 69: //E
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    for (var i = 0; i < 3; i++) {
-                        cubeBlockStatus = rotationY(1, cubeBlockStatus);
-                    }
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 83: //S
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    cubeBlockStatus = rotationZ(1, cubeBlockStatus);
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 88: //X
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    cubeBlockStatus = rotationX(0, cubeBlockStatus);
-                    cubeBlockStatus = rotationX(1, cubeBlockStatus);
-                    cubeBlockStatus = rotationX(2, cubeBlockStatus);
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 89: //Y
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    cubeBlockStatus = rotationY(0, cubeBlockStatus);
-                    cubeBlockStatus = rotationY(1, cubeBlockStatus);
-                    cubeBlockStatus = rotationY(2, cubeBlockStatus);
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-
-            case 90: //Z
-                isAnimating=false;
-                if (Math.abs(Math.round((rotationAngle%360)/90))>0){
-                    cubeBlockStatus = rotationZ(0, cubeBlockStatus);
-                    cubeBlockStatus = rotationZ(1, cubeBlockStatus);
-                    cubeBlockStatus = rotationZ(2, cubeBlockStatus);
-                }
-                updateBlocksWorldMatrixForCommitOperation(Math.round((rotationAngle % 360) / 90) * 90);
-                angleKeys = 0;
-                sync = false;
-                break;
-            default:
-                console.log("This key does not work")
-        }
-    }
 }
 
 function updateAngleKeys(str,angle){
     if(str=="add"){
-        angle = angle + 0.3;
+        angle = angle + 0.1;
     }
     else if (str=="minus"){
-        angle = angle - 0.3;
+        angle = angle - 0.1;
     }
 
 return angle;
