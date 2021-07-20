@@ -1,6 +1,6 @@
 function doResize() {
     // set canvas dimensions
-	var canvas = document.getElementById("my-canvas");
+	canvas = document.getElementById("my-canvas");
     if((window.innerWidth > 40) && (window.innerHeight > 340)) {
 		canvas.width  = window.innerWidth-16;
 		canvas.height = window.innerHeight-280;
@@ -86,7 +86,7 @@ vec4 compLightColor(vec4 lightColor, float LTarget, float LDecay, vec3 LPos) {
 }
 
 
-//Lambert
+// Lambert
 vec4 compDiffuse(vec3 lightDir, vec4 lightCol, vec3 normalVec, vec4 diffColor) {
 
 	return lightCol * diffColor * clamp(dot(lightDir, normalVec),0.0,1.0);
@@ -119,7 +119,7 @@ void main() {
 	vec3 eyeDirVec = normalize(eyePos - fs_pos);
 	
 	
-	//lights
+	// Lights
 	vec3 lightDir = compLightDir(lightPosition);
 	vec4 lightCol = compLightColor(lightColor, lightTarget, lightDecay, lightPosition);
 	
@@ -132,7 +132,7 @@ void main() {
 	// Ambient
 	vec4 ambient = compAmbient(ambColor);
 
-	// final steps
+	// Final
 	vec4 out_color = clamp(ambient + diffuse + specular + emit, 0.0, 1.0);
 	
 	color = vec4(out_color.rgb, 1.0);
@@ -304,14 +304,8 @@ function main(){
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		perspectiveMatrix = utils.MakePerspective(60, w/h, 0.1, 1000.0);
 
-
 	 	// turn on depth testing
 	    gl.enable(gl.DEPTH_TEST);
-
-		// algin the skybox with the light
-		gLightDir = [-1.0, 0.0, 0.0, 0.0];
-		skyboxWM = utils.MakeRotateYMatrix(135);
-		gLightDir = utils.multiplyMatrixVector(skyboxWM, gLightDir);
 
 		loadMeshAndWorldMatrix();
 		drawScene();
@@ -422,19 +416,20 @@ function loadOBJText(fileName){
 		if (request.readyState === 4 && request.status !== 404) {
 			// console.log(fileName + "Loaded successful");
 			// console.log(request.responseText);
-			return request.responseText;//onReadOBJFile(request.responseText, objModel);
+			return request.responseText;
+			//onReadOBJFile(request.responseText, objModel);
 		}
 		else if(request.status === 404) // File not found
 			console.log("obj file loading failed：" + fileName);
 	}
 
 
-	//TODO Fix the runtime error
+	//TODO Fix the runtime warning
 	// Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience.
 	// For more help, check https://xhr.spec.whatwg.org/.
 
 	// Create a request to get the file, the last parameter indicates the asynchronous method
-	request.open('GET', fileName, false); 
+	request.open('GET', fileName, false);
 	request.send();  // send request
 	// console.log("Start loading texture files：" + fileName);
 	return request.responseText;
