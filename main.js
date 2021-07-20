@@ -362,9 +362,6 @@ function loadMeshAndWorldMatrix(){
 			cubeWorldMatrixPrevious[i] = utils.MakeScaleMatrix(worldScale);
 	}
 
-	//TODO Try to find the cube position
-	// cubeWorldMatrix[9] = utils.multiplyMatrices(utils.MakeScaleMatrix(worldScale),utils.MakeRotateXMatrix(40));
-
 }
 
 function drawScene(){

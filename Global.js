@@ -103,20 +103,17 @@ var lightMoveX=0;
 var lightMoveY=0;
 var lightMoveZ=0;
 
-
 var ambientLightColor= "#555555";
 var diffuseColor= "#00ffff";
 var specularColor= "#ffffff";
 var ambientMatColor= "#00ffff";
 var emitColor= "#4D4D47";
-
 var  lightColor= "#ffffff";
-
 var  lightDecay=0;
 var  lightTarget=61;
-
 var  DTexMix= 100;
 var  SpecShine= 100;
+
 
 defShaderParams = {
     ambientLightColor: "#555555",
