@@ -151,6 +151,7 @@ void main() {
 	// Diffuse
 	vec4 diffuse = compDiffuse(LAlightDir, LAlightCol, normalVec, diffColor);
 	
+	//
 
 	// Ambient
 	vec4 ambient = compAmbient(ambColor);
@@ -687,7 +688,7 @@ function drawScene(){
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, mesh[i].indexBuffer);
 
 		gl.uniform1i(program.u_textureUniform, 0);
-		gl.uniform3f(program.eyePosUniform, cx, cy, cz);
+		// gl.uniform3f(program.eyePosUniform, cx, cy, cz);
 
 		WVPmatrix = utils.multiplyMatrices(projectionMatrix, cubeWorldMatrix[i]);
 		gl.uniformMatrix4fv(program.pMatrixUniform, gl.FALSE, utils.transposeMatrix(WVPmatrix));
