@@ -245,7 +245,7 @@ var textureLoaderCallback = function() {
 	gl.activeTexture(gl.TEXTURE0 + this.txNum);
 	gl.bindTexture(gl.TEXTURE_2D, textureId);		
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this);		
-// set the filtering so we don't need mips
+	// set the filtering so we don't need mips
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
