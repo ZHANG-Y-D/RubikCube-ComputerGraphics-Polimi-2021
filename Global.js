@@ -116,5 +116,27 @@ defShaderParams = {
     lightDecay: 0,
     lightTarget: 61,
     DTexMix: 100,
-    SpecShine: 50
+    SpecShine: 100
 }
+
+
+
+// defShaderParams = {
+//     ambientLightColor: "#555555",
+//     diffuseColor: "#00ffff",
+//     specularColor: "#ffffff",
+//     ambientMatColor: "#00ffff",
+//     emitColor: "#4D4D47",
+//     lightColor: "#ffffff",
+//     lightPositionX: -37,
+//     lightPositionY: 41,
+//     lightPositionZ: 45,
+//     lightDecay: 0,
+//     lightTarget: 61,
+//     DTexMix: 100,
+//     SpecShine: 100
+// }
+
+
+
+
