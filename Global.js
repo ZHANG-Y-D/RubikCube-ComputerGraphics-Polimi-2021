@@ -97,7 +97,7 @@ var specularColor= "#ffffff";
 var ambientMatColor= "#00ffff";
 var emitColor= "#4D4D47";
 var lightColor= "#ffffff";
-var lightDecay=0;
+var lightDecay=10;
 var lightTarget=61;
 var DTexMix= 100;
 var SpecShine= 100;
@@ -116,5 +116,5 @@ defShaderParams = {
     lightDecay: 0,
     lightTarget: 61,
     DTexMix: 100,
-    SpecShine: 100
+    SpecShine: 50
 }
