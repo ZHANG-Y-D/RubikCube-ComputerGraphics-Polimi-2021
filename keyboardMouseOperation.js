@@ -239,8 +239,8 @@ var keyFunctionUp =function(e) {
                 break;
 
 
-            case 70: //F
-                //TODO 思考一个反向更新
+            case 70:
+                //F
                 isAnimating=false;
                 if (shiftSync){
                     shiftSync = false;

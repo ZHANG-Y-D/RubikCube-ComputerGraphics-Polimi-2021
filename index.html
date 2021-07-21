@@ -12,15 +12,34 @@
 		<script src="keyboardMouseOperation.js"></script>
 		<script src="Random.js"></script>
 	</head>
-	
+	<style type="text/css">
+		button {
+			width: 200px;
+			padding:8px;
+			background-color: #428bca;
+			border-color: #357ebd;
+			color: #fff;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			border-radius: 10px; /* future proofing */
+			-khtml-border-radius: 10px; /* for old Konqueror browsers */
+			text-align: center;
+			vertical-align: middle;
+			border: 1px solid transparent;
+			font-weight: 900;
+			font-size:125%
+		}
+	</style>
 	<body style="background-color: grey;" onLoad="main();">
 		<canvas id="my-canvas" width='800' height='450' style="background-color: black;">
 			Your browser doesn't support the Canvas Element!
 		</canvas>
 		<div style="text-align:center">
-			<span onclick="resetShaderParams();">Reset</span>
-			<span onclick="generatorRandomOperation(20);">Random</span>
-			<span onclick="resetCubeStatus();">ResetCube</span>
+			<button onclick="resetShaderParams();">Reset View
+<!--			<span onclick="resetShaderParams();">Reset</span>-->
+				</button>
+			<button onclick="generatorRandomOperation(20);">Random</button>
+			<button onclick="resetCubeStatus();">ResetCube</button>
 		</div>
 		<!--	TODO Design the HTML Add a tutor for play this Rubik Cube-->
 	</body>
