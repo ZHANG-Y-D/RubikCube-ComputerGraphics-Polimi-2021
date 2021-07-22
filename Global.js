@@ -115,9 +115,11 @@ defShaderParams = {
     lightPositionZ: 45,
     lightDecay: 0,
     lightTarget: 61,
-    DTexMix: 100,
-    SpecShine: 100
+    SpecShine: 100,
+    DTexMix: 100
 }
+
+
 
 
 

@@ -1,35 +1,35 @@
 //0-17
 function generatorRandomOperation(times){
     resetCubeStatus();
-    var randomOperatioinArray = new Array();  //先声明一维
+    var randomOperationArray = new Array();  //先声明一维
     for(var k=0;k<times;k++){    //一维长度为i,i为变量，可以根据实际情况改变
 
-        randomOperatioinArray[k]=new Array();  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+        randomOperationArray[k]=new Array();  //声明二维，每一个一维数组里面的一个元素都是一个数组；
         for(var j=0;j<2;j++){   //一维数组里面每个元素数组可以包含的数量p，p也是一个变量；
-            randomOperatioinArray[k][j]="";    //这里将变量初始化，我这边统一初始化为空，后面在用所需的值覆盖里面的值
+            randomOperationArray[k][j]="";    //这里将变量初始化，我这边统一初始化为空，后面在用所需的值覆盖里面的值
         }
     }
 
     for(var i = 0;i<times;i++){
-        randomOperatioinArray[i][0]=randomNum(0,8);
-        randomOperatioinArray[i][1]=randomNum(0,1);
+        randomOperationArray[i][0]=randomNum(0,8);
+        randomOperationArray[i][1]=randomNum(0,1);
     }
 
-    console.log(randomOperatioinArray,times);
-    testt(randomOperatioinArray,times);
+    console.log(randomOperationArray,times);
+    testt(randomOperationArray,times);
 }
 
-function testt(randomOperatioinArray,times){
+function testt(randomOperationArray,times){
     for(var i=0;i < times;i++){
-        console.log(randomOperatioinArray[i][0]);
-        console.log(randomOperatioinArray[i][1]);
-        switch(randomOperatioinArray[i][0]){
+        console.log(randomOperationArray[i][0]);
+        console.log(randomOperationArray[i][1]);
+        switch(randomOperationArray[i][0]){
             //R 82
             case 0:
                 operationBlocks = rotationXOperationBlocks(2, cubeBlockStatus);
                 rotationAxis = 'X';
-                // var angleKeyss = 0.00;
-                if(randomOperatioinArray[i][1]) {
+                // var angleKeys = 0.00;
+                if(randomOperationArray[i][1]) {
                     cubeBlockStatus = rotationX(2, cubeBlockStatus);
                     updateBlocksWorldMatrixForRandomOperation(-90,operationBlocks);
                 }
@@ -44,7 +44,7 @@ function testt(randomOperatioinArray,times){
             case 1://B
                 operationBlocks = rotationZOperationBlocks(0, cubeBlockStatus);
                 rotationAxis = 'Z';
-                if(randomOperatioinArray[i][1]) {//未按下
+                if(randomOperationArray[i][1]) {//未按下
                     //add
                     cubeBlockStatus = rotationZ(0, cubeBlockStatus);
                     cubeBlockStatus = rotationZ(0, cubeBlockStatus);
@@ -63,7 +63,7 @@ function testt(randomOperatioinArray,times){
             case 2:
                 operationBlocks = rotationYOperationBlocks(2, cubeBlockStatus);
                 rotationAxis = 'Y';
-                if(randomOperatioinArray[i][1]) {
+                if(randomOperationArray[i][1]) {
                     //add
                     cubeBlockStatus = rotationY(2, cubeBlockStatus);
                     cubeBlockStatus = rotationY(2, cubeBlockStatus);
@@ -81,7 +81,7 @@ function testt(randomOperatioinArray,times){
             case 3:
                 operationBlocks = rotationXOperationBlocks(1, cubeBlockStatus);
                 rotationAxis = 'X';
-                if(randomOperatioinArray[i][1]) {
+                if(randomOperationArray[i][1]) {
                     //add
                     cubeBlockStatus = rotationX(1, cubeBlockStatus);
                     cubeBlockStatus = rotationX(1, cubeBlockStatus);
@@ -99,7 +99,7 @@ function testt(randomOperatioinArray,times){
             case 4:
                 operationBlocks = rotationYOperationBlocks(1, cubeBlockStatus);
                 rotationAxis = 'Y';
-                if(randomOperatioinArray[i][1]) {
+                if(randomOperationArray[i][1]) {
                     //add
                     cubeBlockStatus = rotationY(1, cubeBlockStatus);
                     cubeBlockStatus = rotationY(1, cubeBlockStatus);
@@ -119,7 +119,7 @@ function testt(randomOperatioinArray,times){
             case 5:
                 operationBlocks = rotationZOperationBlocks(1, cubeBlockStatus);
                 rotationAxis = 'Z';
-                if(randomOperatioinArray[i][1]) {
+                if(randomOperationArray[i][1]) {
                     //
                     cubeBlockStatus = rotationZ(1, cubeBlockStatus);
                     updateBlocksWorldMatrixForRandomOperation(-90,operationBlocks);
@@ -137,7 +137,7 @@ function testt(randomOperatioinArray,times){
             case 6:
                 operationBlocks = rotationZOperationBlocks(2, cubeBlockStatus);
                 rotationAxis = 'Z';
-                if(randomOperatioinArray[i][1]) {
+                if(randomOperationArray[i][1]) {
                     //
                     cubeBlockStatus = rotationZ(2, cubeBlockStatus);
                     updateBlocksWorldMatrixForRandomOperation(-90,operationBlocks);
@@ -155,7 +155,7 @@ function testt(randomOperatioinArray,times){
             case 7:
                 operationBlocks = rotationXOperationBlocks(0, cubeBlockStatus);
                 rotationAxis = 'X';
-                if(randomOperatioinArray[i][1]) {
+                if(randomOperationArray[i][1]) {
                     //add
                     cubeBlockStatus = rotationX(0, cubeBlockStatus);
                     cubeBlockStatus = rotationX(0, cubeBlockStatus);
@@ -173,7 +173,7 @@ function testt(randomOperatioinArray,times){
             case 8:
                 operationBlocks = rotationYOperationBlocks(0, cubeBlockStatus);
                 rotationAxis = 'Y';
-                if(randomOperatioinArray[i][1]) {
+                if(randomOperationArray[i][1]) {
                     //
                     cubeBlockStatus = rotationY(0, cubeBlockStatus);
                     updateBlocksWorldMatrixForRandomOperation(-90,operationBlocks);

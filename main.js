@@ -97,6 +97,7 @@ vec4 compDiffuse(vec3 lightDir, vec4 lightCol, vec3 normalVec, vec4 diffColor) {
 vec4 compSpecular(vec3 lightDir, vec4 lightCol, vec3 normalVec, vec3 eyeDirVec) {
 	
 	return specularColor * pow(clamp(dot(eyeDirVec, -reflect(lightDir, normalVec)), 0.0, 1.0), SpecShine) * lightCol;
+	
 }
 
 
