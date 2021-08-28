@@ -121,7 +121,10 @@ void main() {
 	
 	vec3 normalVec = normalize(fs_norm);
 
-	vec3 eyeDirVec = normalize(eyePos - fs_pos);
+
+	// vec3 eyeDirVec = normalize(eyePos - fs_pos);
+	//In this case, the eyePos is 0
+	vec3 eyeDirVec = normalize(-fs_pos);
 	
 	
 	// Lights
