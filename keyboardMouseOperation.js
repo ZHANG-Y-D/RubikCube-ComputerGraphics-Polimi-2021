@@ -539,6 +539,7 @@ function doMouseDown(event) {
     lastMouseY = event.pageY;
     mouseState = true;
 }
+
 function doMouseUp(event) {
     lastMouseX = -100;
     lastMouseY = -100;
@@ -558,6 +559,7 @@ function doMouseMove(event) {
         }
     }
 }
+
 function doMouseWheel(event) {
     var nLookRadius = lookRadius + event.wheelDelta/1000.0;
     if((nLookRadius > 2.0) && (nLookRadius < 20.0)) {

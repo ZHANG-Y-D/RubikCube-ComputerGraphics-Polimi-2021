@@ -28,20 +28,30 @@ layout(location = POSITION_LOCATION) in vec3 in_pos;
 layout(location = NORMAL_LOCATION) in vec3 in_norm;
 layout(location = UV_LOCATION) in vec2 in_uv;
 
+uniform mat4 matrix;
 uniform mat4 pMatrix;
-uniform mat4 wMatrix;
+uniform mat4 nMatrix;
+// uniform mat4 wMatrix;
+
 
 out vec3 fs_pos;
 out vec3 fs_norm;
 out vec2 fs_uv;
 
 void main() {
-	fs_pos = (wMatrix * vec4(in_pos, 1.0)).xyz;
-	// fs_norm = in_norm;
-	fs_norm = (wMatrix * vec4(in_norm, 0.0)).xyz;
-	fs_uv = vec2(in_uv.x, 1.0-in_uv.y);
+
+	// fs_pos = (wMatrix * vec4(in_pos, 1.0)).xyz;
+	// // fs_norm = in_norm;
+	// fs_norm = (wMatrix * vec4(in_norm, 0.0)).xyz;
+	// fs_uv = vec2(in_uv.x, 1.0-in_uv.y);
+	//
+	// gl_Position = pMatrix * vec4(in_pos, 1.0);
 	
-	gl_Position = pMatrix * vec4(in_pos, 1.0);
+	fs_norm = mat3(nMatrix) * in_norm;
+	fs_pos = (pMatrix * vec4(in_pos, 1.0)).xyz; 
+	fs_uv = vec2(in_uv.x, 1.0-in_uv.y);
+	gl_Position = matrix * vec4(in_pos, 1.0);
+	
 }`;
 
 
@@ -117,8 +127,10 @@ void main() {
 				   			max(max(emitColor.r, emitColor.g), emitColor.b);
 	
 	vec3 normalVec = normalize(fs_norm);
-	vec3 eyeDirVec = normalize(eyePos - fs_pos);
 	
+	// In this case, eyePos is 0
+	vec3 eyeDirVec = normalize(eyePos - fs_pos);
+
 	
 	// Lights
 	vec3 lightDir = compLightDir(lightPosition);
@@ -144,14 +156,21 @@ function resetShaderParams() {
 		const value = defShaderParams[name];
 		window[name] = value;
 	}
-	
-	cx = 2.0;
-	cy = 2.0;
-	cz = 6.5;
-	elevation = -30.0;
-	angle = 45.0;
-	roll = 0.01;
-	lookRadius = 5.0;
+
+	cx = 0.0;
+	cy = 0.0;
+	cz = 0.0;
+	angle = -90.0;
+	elevation = 0.0;
+
+
+	// cx = 2.0;
+	// cy = 2.0;
+	// cz = 6.5;
+	// elevation = -30.0;
+	// angle = 45.0;
+	// roll = 0.01;
+	// lookRadius = 5.0;
 
 }
 
@@ -186,6 +205,7 @@ function convertColorFromHexToRGB(gl) {
 
 function calculateLightPosition(gl) {
 	gl.uniform3f(program[this.pGLSL+"Uniform"],lightPositionX / 10,lightPositionY / 10,lightPositionZ / 10);
+
 }
 
 
@@ -203,8 +223,10 @@ unifParArray =[
 	new UniformParameter("ambientMatColor","ambientMatColor", convertColorFromHexToRGB),
 	new UniformParameter("emitColor","emitColor", convertColorFromHexToRGB),
 	new UniformParameter("","u_texture", noAutoSet),
+	new UniformParameter("","matrix", noAutoSet),
+	new UniformParameter("","nMatrix", noAutoSet),
 	new UniformParameter("","pMatrix", noAutoSet),
-	new UniformParameter("","wMatrix", noAutoSet),
+	// new UniformParameter("","wMatrix", noAutoSet),
 	new UniformParameter("","eyePos", noAutoSet)
 ];
 
@@ -352,9 +374,11 @@ function loadMeshAndWorldMatrix(){
 
 	for(var i = 0; i < 26; i++)
 	{
-			cubeWorldMatrix[i] = utils.MakeScaleMatrix(worldScale);
-			cubeWorldMatrixOriginal[i] = utils.MakeScaleMatrix(worldScale);
-			cubeWorldMatrixPrevious[i] = utils.MakeScaleMatrix(worldScale);
+
+			cubeWorldMatrix[i] = utils.MakeWorld(tx,ty,tz,rx,ry,rz,worldScale);
+			cubeWorldMatrixOriginal[i] = utils.MakeWorld(tx,ty,tz,rx,ry,rz,worldScale);
+			cubeWorldMatrixPrevious[i] = utils.MakeWorld(tx,ty,tz,rx,ry,rz,worldScale);
+
 	}
 
 }
@@ -369,13 +393,30 @@ function drawScene(){
 	lightPositionY = lightPositionY + lightMoveY;
 
 
-	cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
-	cx = lookRadius * Math.sin(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
-	cy = lookRadius * Math.sin(utils.degToRad(-elevation));
+	// cz = lookRadius * Math.cos(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
+	// cx = lookRadius * Math.sin(utils.degToRad(-angle)) * Math.cos(utils.degToRad(-elevation));
+	// cy = lookRadius * Math.sin(utils.degToRad(-elevation));
 
 	// The Camera is fixed
 	viewMatrix = utils.MakeView(cx, cy, cz, elevation, -angle);
 	projectionMatrix = utils.multiplyMatrices(perspectiveMatrix, viewMatrix);
+
+
+	let lightPositionHandle = gl.getUniformLocation(program, 'lightPosition');
+	// let lightPosition = [lightPositionX / 10,lightPositionY / 10,lightPositionZ / 10];
+
+
+	var length = Math.sqrt(lightPositionX * lightPositionX + lightPositionY * lightPositionY + lightPositionZ * lightPositionZ);
+	let lightPosition = [lightPositionX / length, lightPositionY / length, lightPositionZ / length];
+
+
+
+	//Matrix to transform the light direction from world space to camera space
+	var lightPositionMatrix = utils.invertMatrix(utils.transposeMatrix(viewMatrix));
+	var lightPositionTransformed = 	utils.multiplyMatrix3Vector3(utils.sub3x3from4x4(lightPositionMatrix), lightPosition);
+	gl.uniform3fv(lightPositionHandle,lightPositionTransformed);
+
+
 
 	for(var i = 0; i < 26; i++)
 	{
@@ -393,14 +434,32 @@ function drawScene(){
 
 		gl.uniform1i(program.u_textureUniform, 0);
 		gl.uniform3f(program.eyePosUniform, cx, cy, cz);
+		// gl.uniform3f(program.eyePosUniform, 0, 0, 0);
+
 
 		const WVPMatrix = utils.multiplyMatrices(projectionMatrix, cubeWorldMatrix[i]);
-		gl.uniformMatrix4fv(program.pMatrixUniform, gl.FALSE, utils.transposeMatrix(WVPMatrix));
-		gl.uniformMatrix4fv(program.wMatrixUniform, gl.FALSE, utils.transposeMatrix(cubeWorldMatrix[i]));
+		// gl.uniformMatrix4fv(program.pMatrixUniform, gl.FALSE, utils.transposeMatrix(WVPMatrix));
+		// gl.uniformMatrix4fv(program.wMatrixUniform, gl.FALSE, utils.transposeMatrix(cubeWorldMatrix[i]));
 
+		//Inverse transpose of the world view matrix for the normals
+		let cubeNormalMatrix = utils.invertMatrix(utils.transposeMatrix(cubeWorldMatrix[i]));
+
+		gl.uniformMatrix4fv(gl.getUniformLocation(program,'matrix'),
+							gl.FALSE,
+							utils.transposeMatrix(WVPMatrix));
+
+		gl.uniformMatrix4fv(gl.getUniformLocation(program,'nMatrix'),
+							gl.FALSE,
+							utils.transposeMatrix(cubeNormalMatrix));
+
+		gl.uniformMatrix4fv(gl.getUniformLocation(program,'pMatrix'),
+							gl.FALSE,
+							utils.transposeMatrix(cubeWorldMatrix[i]));
 
 		gl.drawElements(gl.TRIANGLES, mesh[i].indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 	}
+	console.log(cx,cy,cz,angle,elevation);
+
 
 	for(var m = 0; m < unifParArray.length; m++) {
 		unifParArray[m].type(gl);
