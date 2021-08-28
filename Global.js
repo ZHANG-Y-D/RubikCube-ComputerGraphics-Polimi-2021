@@ -16,6 +16,7 @@ var cubeWorldMatrixOriginal = [];
 var cubeWorldMatrixPrevious=[];
 var cubeWorldMatrix = [];
 
+
 var mouseState = false;
 var lastMouseX = -100,
     lastMouseY = -100;

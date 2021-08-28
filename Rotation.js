@@ -13,34 +13,34 @@ function updateBlocksWorldMatrixForAnimation() {
                     rotationAngle = -130;
                 }
 
-                // Without Quaternion
-                switch (rotationAxis) {
-                    case "X":
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
-                        break;
-                    case "Y":
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
-						break;
-                    case "Z":
-                        cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
-						break;
-                }
+                // // Without Quaternion
+                // switch (rotationAxis) {
+                //     case "X":
+                //         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+                //         break;
+                //     case "Y":
+                //         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+				// 		break;
+                //     case "Z":
+                //         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+				// 		break;
+                // }
 
-                // //Quaternion
-				// switch (rotationAxis) {
-				// 	case "X":
-				// 		cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(-rotationAngle,0,0),
-				// 			cubeWorldMatrixPrevious[n]);
-				// 		break;
-				// 	case "Y":
-				// 		cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,rotationAngle,0),
-				// 			cubeWorldMatrixPrevious[n]);
-				// 		break;
-				// 	case "Z":
-				// 		cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,0,rotationAngle),
-				// 			cubeWorldMatrixPrevious[n]);
-				// 		break;
-				// }
+                //Quaternion
+				switch (rotationAxis) {
+					case "X":
+						cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(rotationAngle,0,0),
+							cubeWorldMatrixPrevious[n]);
+						break;
+					case "Y":
+						cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,rotationAngle,0),
+							cubeWorldMatrixPrevious[n]);
+						break;
+					case "Z":
+						cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,0,rotationAngle),
+							cubeWorldMatrixPrevious[n]);
+						break;
+				}
 
             }
         }
@@ -51,34 +51,35 @@ function updateBlocksWorldMatrixForCommitOperation(rotationAngle) {
     // console.log(rotationAngle)
     for (var n = 0; n < 26; n++) {
         if (operationBlocks.includes(n)) {
-        	// Without Quaternion
-            switch (rotationAxis) {
-                case "X":
-                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
-                    break;
-                case "Y":
-                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
-                    break;
-                case "Z":
-                    cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
-                    break;
-            }
+        	// // Without Quaternion
+            // switch (rotationAxis) {
+            //     case "X":
+            //         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+            //         break;
+            //     case "Y":
+            //         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+            //         break;
+            //     case "Z":
+            //         cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrixPrevious[n]);
+            //         break;
+            // }
 
-			// //Quaternion
-			// switch (rotationAxis) {
-			// 	case "X":
-			// 		cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(-rotationAngle,0,0),
-			// 													cubeWorldMatrixPrevious[n]);
-			// 		break;
-			// 	case "Y":
-			// 		cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,rotationAngle,0),
-			// 													cubeWorldMatrixPrevious[n]);
-			// 		break;
-			// 	case "Z":
-			// 		cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,0,rotationAngle),
-			// 													cubeWorldMatrixPrevious[n]);
-			// 		break;
-			// }
+			//Quaternion
+			switch (rotationAxis) {
+				case "X":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(rotationAngle,0,0),
+																cubeWorldMatrixPrevious[n]);
+					break;
+				case "Y":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,rotationAngle,0),
+																cubeWorldMatrixPrevious[n]);
+					break;
+				case "Z":
+					cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,0,rotationAngle),
+																cubeWorldMatrixPrevious[n]);
+					break;
+			}
+
         }
     }
 }
@@ -87,15 +88,33 @@ function updateBlocksWorldMatrixForRandomOperation(rotationAngle,operationBlocks
 	//console.log(rotationAngle)
 	for (var n = 0; n < 26; n++) {
 		if (operationBlocksInuse.includes(n)) {
+
+			// //With Quaternion
+			// switch (rotationAxis) {
+			// 	case "X":
+			// 		cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrix[n]);
+			// 		break;
+			// 	case "Y":
+			// 		cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrix[n]);
+			// 		break;
+			// 	case "Z":
+			// 		cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrix[n]);
+			// 		break;
+			// }
+
+			//Quaternion
 			switch (rotationAxis) {
 				case "X":
-					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateXMatrix(rotationAngle),cubeWorldMatrix[n]);
+					cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(rotationAngle,0,0),
+						cubeWorldMatrix[n]);
 					break;
 				case "Y":
-					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateYMatrix(rotationAngle),cubeWorldMatrix[n]);
+					cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,rotationAngle,0),
+						cubeWorldMatrix[n]);
 					break;
 				case "Z":
-					cubeWorldMatrix[n] = utils.multiplyMatrices(utils.MakeRotateZMatrix(rotationAngle),cubeWorldMatrix[n]);
+					cubeWorldMatrix[n] = utils.multiplyMatrices(updateWorldWithQuaternion(0,0,rotationAngle),
+						cubeWorldMatrix[n]);
 					break;
 			}
 		}
@@ -184,10 +203,11 @@ function rotationZOperationBlocks (i,cubeBlockStatusInuse){
 }
 
 
-var quaternion = new Quaternion();
+var quaternion;
 
 function updateWorldWithQuaternion(rvx, rvy, rvz) {
 
+	quaternion = new Quaternion();
 	var x = utils.degToRad(rvx);
 	var y = utils.degToRad(rvy);
 	var z = utils.degToRad(rvz);
@@ -196,11 +216,11 @@ function updateWorldWithQuaternion(rvx, rvy, rvz) {
 	var y_delta = new Quaternion(Math.cos(y / 2), 0, Math.sin(y / 2), 0);
 	var z_delta = new Quaternion(Math.cos(z / 2), 0, 0, Math.sin(z / 2));
 
-
 	quaternion = x_delta.mul(y_delta).mul(z_delta).mul(quaternion);
 
-	var out = quaternion.toMatrix4();
-
-	return out;
+	return quaternion.toMatrix4();
 
 }
+
+
+
