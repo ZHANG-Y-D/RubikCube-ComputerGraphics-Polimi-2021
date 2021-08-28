@@ -10,6 +10,8 @@ var projectionMatrix,
     perspectiveMatrix,
     viewMatrix;
 
+var worldScale = 0.3;
+
 var cubeWorldMatrixOriginal = [];
 var cubeWorldMatrixPrevious=[];
 var cubeWorldMatrix = [];
@@ -19,24 +21,15 @@ var lastMouseX = -100,
     lastMouseY = -100;
 
 //Parameters for Camera
-var cx = 0.0;
-var cy = 0.0;
-var cz = 0.0;
-var angle = -90.0;
-var elevation = 0.0;
+var cx = 2.0;
+var cy = 2.0;
+var cz = 6.5;
 
-//Parameters for initial world
-var tx = 5.0;
-var ty = 0.0;
-var tz = 0.0;
-var rx = 0.0;
-var ry = 0.0;
-var rz = 0.0;
-var worldScale = 0.3;
+var elevation = -30.0;
+var angle = 45.00;
+var roll = 0.01;
 
-
-// var roll = 0.01;
-// var lookRadius = 10.0;
+var lookRadius = 5.0;
 
 
 var keys = [];
